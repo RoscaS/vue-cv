@@ -1,5 +1,7 @@
 # vue-cv
 
+* [Icons](https://fontawesome.com/icons?d=gallery)
+
 ## Project setup
 ```
 npm install

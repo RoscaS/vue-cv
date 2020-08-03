@@ -1,49 +1,39 @@
 <template>
   <div class="sidebar-wrapper">
     <div class="sections">
-      <div id="contact" class="side-block">
+      <div>
+        <Header />
+      </div>
+
+      <div v-if="content.sidebar.contactSection.entries.length" id="contact" class="side-block">
         <h1>Contact <span>info</span></h1>
         <ul>
-          <li>
-            <i class="fa" :class="content.email.icon" />
-            {{ content.email.value }}
-          </li>
-          <li>
-            <i class="fa" :class="content.phone.icon" />
-            {{ content.phone.value }}
-          </li>
-          <li>
-            <i class="fa" :class="content.github.icon" />
-            {{ content.github.value }}
-          </li>
-          <li>
-            <i class="fa" :class="content.website.icon" />
-            {{ content.website.value }}
+          <li
+            v-for="entry in content.sidebar.contactSection.entries"
+            :key="entry"
+          >
+            <i class="fa" :class="entry.icon" />
+            {{ entry.value }}
           </li>
         </ul>
       </div>
 
-      <div class="side-block-elemnent side-block">
-        <h1>Skills</h1>
+      <div
+        class="side-block-element side-block"
+        v-for="block in content.sidebar.blocks"
+        :key="block.name"
+      >
+        <h1 v-if="!block.icon">{{ block.name }}</h1>
+        <h1 v-else style="text-align: center">
+          <i class="fa" :class="block.icon" />
+        </h1>
         <ul>
-          <li v-for="skill in content.skills" :key="skill">
-            {{ skill }}
+          <li v-for="entry in block.entries" :key="entry">
+            {{ entry }}
           </li>
         </ul>
       </div>
-      
-      <div class="side-block-elemnent side-block">
-        <h1>Languages</h1>
-        <ul>
-          <li v-for="language in content.languages" :key="language">
-            {{ language }}
-          </li>
-        </ul>
-      </div>
-      
     </div>
-    
-
 
     <div id="disclamer" class="side-block">
       <!--      &copy; JrosK.ch-->
@@ -53,9 +43,11 @@
 
 <script>
 import content from "@/mixins/content";
+import Header from "@/components/sections/Header";
 
 export default {
   name: "Sidebar",
+  components: { Header },
   mixins: [content],
 };
 </script>

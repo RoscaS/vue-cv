@@ -16,7 +16,7 @@
         <ul v-if="data.tasks">
           <li v-for="i in data.tasks" :key="i">{{ i }}</li>
         </ul>
-        <div class="concise" v-if="data.description">
+        <div v-if="data.description" class="concise">
           {{ data.description }}
           <ul v-if="data.list">
             <li v-for="element in data.list" :key="element" v-html="element"/>

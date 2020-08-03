@@ -5,7 +5,7 @@
       <span> {{ content.firstname }}</span>
       <span class="primary"> {{ content.lastname }}</span>
     </h1>
-    <div class="subtitle">{{ content.title }}</div>
+    <div class="subtitle" v-html="content.title"></div>
   </div>
 </template>
 
@@ -22,10 +22,11 @@ export default {
 .header-wrapper {
   display: flex;
   flex-direction: column;
-  text-align: center;
+  /*text-align: center;*/
 }
 
 .picture {
+  margin-bottom: 15px;
   margin-left: auto;
   margin-right: auto;
   background-color: #e2e2e2;

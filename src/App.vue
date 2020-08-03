@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="main">
-      <Header id="title"/>
+<!--      <Header id="title"/>-->
       <MainContent/>
     </div>
     <Sidebar id="sidebar"/>
@@ -9,12 +9,13 @@
 </template>
 
 <script>
-import Header from '@/components/sections/Header';
+// import Header from '@/components/sections/Header';
 import MainContent from '@/components/sections/MainContent';
 import Sidebar from '@/components/Sidebar';
+
 export default {
   name: "App",
-  components: { Sidebar, MainContent, Header },
+  components: { Sidebar, MainContent },
 };
 </script>
 
