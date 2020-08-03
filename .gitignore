@@ -4,6 +4,7 @@ node_modules
 
 
 /src/content.js
+/src/assets/picture.jpg
 
 # local env files
 .env.local
