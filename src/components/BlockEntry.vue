@@ -15,7 +15,7 @@
       <div class="description">
         <div :class="{'concise': data.concise}">
           <span v-if="data.description">{{ data.description }}</span>
-          <ul v-if="data.tasks">
+          <ul class="tasks" v-if="data.tasks">
             <li v-for="i in data.tasks" :key="i" v-html="i"/>
           </ul>
         </div>
@@ -34,4 +34,18 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  
+  .place {
+    font-weight: 400;
+  }
+  
+  .description {
+    font-weight: 400;
+  }
+  
+  .tasks {
+    font-weight: 300;
+  }
+  
+</style>

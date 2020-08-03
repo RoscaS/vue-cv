@@ -30,8 +30,8 @@ export default {
   margin-left: auto;
   margin-right: auto;
   background-color: #e2e2e2;
-  border-radius: 50px;
-  width: 100px;
-  height: 100px;
+  border-radius: 100px;
+  width: 160px;
+  height: 160px;
 }
 </style>
