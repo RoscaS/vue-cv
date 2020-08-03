@@ -1,5 +1,5 @@
 <template>
-  <div class="blocks" :class="concise">
+  <div class="blocks">
     <div class="date">
       <span v-if="data.fromDate">{{ data.fromDate }}</span>
       <span v-if="data.toDate">{{ data.toDate }}</span>
@@ -13,13 +13,10 @@
       </header>
 
       <div class="description">
-        <ul v-if="data.tasks">
-          <li v-for="i in data.tasks" :key="i">{{ i }}</li>
-        </ul>
-        <div v-if="data.description" class="concise">
-          {{ data.description }}
-          <ul v-if="data.list">
-            <li v-for="element in data.list" :key="element" v-html="element"/>
+        <div :class="{'concise': data.concise}">
+          <span v-if="data.description">{{ data.description }}</span>
+          <ul v-if="data.tasks">
+            <li v-for="i in data.tasks" :key="i" v-html="i"/>
           </ul>
         </div>
       </div>
