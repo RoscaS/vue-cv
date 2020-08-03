@@ -1,7 +1,11 @@
 <template>
   <div class="blocks">
     <div class="date">
-      <span v-if="data.fromDate">{{ data.fromDate }}</span>
+      <span v-if="data.fromDate">
+        {{ data.fromDate.split(' ')[0] }}
+        <br>
+        {{ data.fromDate.split(' ')[1] }}
+      </span>
       <span v-if="data.toDate">{{ data.toDate }}</span>
     </div>
     <div class="decorator"></div>
