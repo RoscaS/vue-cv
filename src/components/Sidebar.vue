@@ -2,12 +2,8 @@
   <div class="sidebar-wrapper">
     <div class="sections">
       <div id="contact" class="side-block">
-        <h1>Contact Info</h1>
+        <h1>Contact <span>info</span></h1>
         <ul>
-          <li>
-            <i class="fa" :class="content.website.icon" />
-            {{ content.website.value }}
-          </li>
           <li>
             <i class="fa" :class="content.email.icon" />
             {{ content.email.value }}
@@ -16,10 +12,18 @@
             <i class="fa" :class="content.phone.icon" />
             {{ content.phone.value }}
           </li>
+          <li>
+            <i class="fa" :class="content.github.icon" />
+            {{ content.github.value }}
+          </li>
+          <li>
+            <i class="fa" :class="content.website.icon" />
+            {{ content.website.value }}
+          </li>
         </ul>
       </div>
-  
-      <div id="skills" class="side-block">
+
+      <div class="side-block-elemnent side-block">
         <h1>Skills</h1>
         <ul>
           <li v-for="skill in content.skills" :key="skill">
@@ -27,10 +31,22 @@
           </li>
         </ul>
       </div>
+      
+      <div class="side-block-elemnent side-block">
+        <h1>Languages</h1>
+        <ul>
+          <li v-for="language in content.languages" :key="language">
+            {{ language }}
+          </li>
+        </ul>
+      </div>
+      
     </div>
     
+
+
     <div id="disclamer" class="side-block">
-<!--      &copy; JrosK.ch-->
+      <!--      &copy; JrosK.ch-->
     </div>
   </div>
 </template>
@@ -45,12 +61,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .sidebar-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  #disclamer {
-    margin-top: auto;
-  }
+.sidebar-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+#disclamer {
+  margin-top: auto;
+}
 </style>

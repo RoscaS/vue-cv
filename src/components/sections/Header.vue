@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1>{{ content.name }}</h1>
+    <h1>
+      <span> {{ content.firstname }}</span>
+      <span class="primary"> {{ content.lastname }}</span>
+    </h1>
     <div class="subtitle">{{ content.title }}</div>
   </div>
 </template>

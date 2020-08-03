@@ -8,7 +8,7 @@
     <div class="details">
       <header>
         <h3>{{ data.title }}</h3>
-        <span class="place" v-if="data.place">{{ data.place }}</span>
+        <span class="place secondary" v-if="data.place">{{ data.place }}</span>
         <span class="location" v-if="data.location">{{ data.location }}</span>
       </header>
 

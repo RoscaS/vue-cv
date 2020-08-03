@@ -1,13 +1,18 @@
 export default {
-  name: 'Sol Rosca',
+  firstname: 'Sol',
+  lastname: 'Rosca',
   title: 'Frontend engineer',
   website: {
     icon: 'fa-globe',
-    value: 'https://roscas.ch',
+    value: 'roscas.ch',
   },
   email: {
     icon: 'fa-envelope',
     value: 'sol.rosca@gmail.com'
+  },
+  github: {
+    icon: 'fa-github',
+    value: 'github.com/RoscaS',
   },
   phone: {
     icon: 'fa-phone',
@@ -18,6 +23,12 @@ export default {
     'Wall climbing',
     'Rescuscitating',
     'Kinging',
+  ],
+  languages: [
+    'French',
+    'English',
+    'Flamish',
+    'Romanian',
   ],
   blocks: [
     {
