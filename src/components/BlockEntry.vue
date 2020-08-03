@@ -6,7 +6,13 @@
         <br>
         {{ data.fromDate.split(' ')[1] }}
       </span>
-      <span v-if="data.toDate">{{ data.toDate }}</span>
+      <span v-if="data.toDate">
+        {{ data.toDate.split(' ')[0] }}
+        <br>
+        {{ data.toDate.split(' ')[1] }}
+      </span>
+      
+      
     </div>
     <div class="decorator"></div>
     <div class="details">
