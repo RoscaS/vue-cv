@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="header-wrapper">
+    <img class="picture" src="@/assets/picture.jpg" alt="" />
     <h1>
       <span> {{ content.firstname }}</span>
       <span class="primary"> {{ content.lastname }}</span>
@@ -17,4 +18,19 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.header-wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.picture {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #e2e2e2;
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+}
+</style>
