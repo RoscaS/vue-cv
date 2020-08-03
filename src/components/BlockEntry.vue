@@ -11,8 +11,6 @@
         <br>
         {{ data.toDate.split(' ')[1] }}
       </span>
-      
-      
     </div>
     <div class="decorator"></div>
     <div class="details">

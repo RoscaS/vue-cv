@@ -39,9 +39,11 @@
           >
             <span class="block-entry-value">{{ entry.value }}</span>
             <br />
-            <span class="block-entry-complement" v-if="entry.complement">
-              {{ entry.complement }}
-            </span>
+            <span
+              class="block-entry-complement"
+              v-if="entry.complement"
+              v-html="entry.complement"
+            />
           </li>
         </ul>
       </div>
