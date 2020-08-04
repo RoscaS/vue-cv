@@ -32,7 +32,7 @@ export default {
   margin-right: auto;
   background-color: #e2e2e2;
   border-radius: 100px;
-  width: 160px;
-  height: 160px;
+  width: 130px;
+  height: 130px;
 }
 </style>

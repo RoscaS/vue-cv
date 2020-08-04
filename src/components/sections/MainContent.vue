@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <div class="main-block" v-for="block in content.blocks" :key="block.name">
+  <div id="main">
+    <div class="main-block" v-for="(block, c) in content.blocks" :key="c">
       <h2>
         <i class="fa" :class="block.icon" />
-        {{ block.name }}
+        <span class="title">{{ block.name }}</span>
       </h2>
       <BlockEntry
         v-for="entry in block.entries"
@@ -26,4 +26,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  
+  .title {
+    font-size: 12pt;
+  }
+  
+</style>
