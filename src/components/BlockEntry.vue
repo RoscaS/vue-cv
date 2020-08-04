@@ -2,14 +2,14 @@
   <div class="blocks">
     <div class="date">
       <span v-if="data.fromDate">
-        {{ data.fromDate.split(' ')[0] }}
-        <br>
-        {{ data.fromDate.split(' ')[1] }}
+        {{ data.fromDate.split(" ")[0] }}
+        <br />
+        {{ data.fromDate.split(" ")[1] }}
       </span>
       <span v-if="data.toDate">
-        {{ data.toDate.split(' ')[0] }}
-        <br>
-        {{ data.toDate.split(' ')[1] }}
+        {{ data.toDate.split(" ")[0] }}
+        <br />
+        {{ data.toDate.split(" ")[1] }}
       </span>
     </div>
     <div class="decorator"></div>
@@ -17,16 +17,16 @@
       <header>
         <h3>{{ data.title }}</h3>
         <span class="place secondary" v-if="data.place">{{ data.place }}</span>
+
         <span class="location" v-if="data.location">{{ data.location }}</span>
+        <span class="url" v-if="data.url">{{ data.url }}</span>
       </header>
 
-      <div class="description">
-        <div :class="{'concise': data.concise}">
-          <span v-if="data.description">{{ data.description }}</span>
-          <ul class="tasks" v-if="data.tasks">
-            <li v-for="i in data.tasks" :key="i" v-html="i"/>
-          </ul>
-        </div>
+      <div class="description" :class="{ concise: data.concise }">
+        <span v-if="data.description">{{ data.description }}</span>
+        <ul class="tasks" v-if="data.tasks">
+          <li v-for="i in data.tasks" :key="i" v-html="i" />
+        </ul>
       </div>
     </div>
   </div>
@@ -43,17 +43,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  
-  .place {
-    font-weight: 400;
-  }
-  
-  .description {
-    font-weight: 400;
-  }
-  
-  .tasks {
-    font-weight: 300;
-  }
-  
+.place {
+  font-weight: 400;
+}
+
+.description {
+  font-weight: 400;
+}
+
+.tasks {
+  font-weight: 300;
+}
 </style>
