@@ -1,11 +1,12 @@
 <template>
   <div class="header-wrapper">
     <img class="picture" src="@/assets/picture.jpg" alt="" />
-    <h1>
+    <h1 style="font-size: 24px">
       <span> {{ content.firstname }}</span>
       <span class="primary"> {{ content.lastname }}</span>
     </h1>
-    <div class="subtitle" v-html="content.title"></div>
+    <div style="font-weight: 600; font-size: 14px" class="subtitle" v-html="content.title"></div>
+    <div style="margin-top: 1em" class="subtitle" v-html="content.basic"></div>
   </div>
 </template>
 
