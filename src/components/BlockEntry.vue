@@ -22,7 +22,11 @@
         <span class="url" v-if="data.url">{{ data.url }}</span>
       </header>
 
-      <div class="description" :class="{ concise: data.concise }">
+      <div
+        class="description"
+        :class="{ concise: data.concise }"
+        :style="!data.location ? 'margin-top: 0' : ''"
+      >
         <span v-if="data.description">{{ data.description }}</span>
         <ul class="tasks" v-if="data.tasks">
           <li v-for="i in data.tasks" :key="i" v-html="i" />
@@ -53,7 +57,8 @@ export default {
   font-size: 9pt !important;
 }
 
-.location, .url {
+.location,
+.url {
   font-size: 7pt;
 }
 
