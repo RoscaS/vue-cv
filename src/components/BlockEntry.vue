@@ -2,14 +2,16 @@
   <div class="blocks">
     <div class="date">
       <span v-if="data.fromDate">
-        {{ data.fromDate.split(" ")[0] }}
-        <br />
-        {{ data.fromDate.split(" ")[1] }}
+        {{ data.fromDate }}
+<!--        {{ data.fromDate.split(" ")[0] }}-->
+<!--        <br />-->
+<!--        {{ data.fromDate.split(" ")[1] }}-->
       </span>
       <span v-if="data.toDate">
-        {{ data.toDate.split(" ")[0] }}
-        <br />
-        {{ data.toDate.split(" ")[1] }}
+        {{ data.toDate }}
+<!--        {{ data.toDate.split(" ")[0] }}-->
+<!--        <br />-->
+<!--        {{ data.toDate.split(" ")[1] }}-->
       </span>
     </div>
     <div class="decorator"></div>
@@ -27,7 +29,7 @@
         :class="{ concise: data.concise }"
         :style="!data.location ? 'margin-top: 0' : ''"
       >
-        <span v-if="data.description">{{ data.description }}</span>
+        <span v-if="data.description" v-html="data.description"/>
         <ul class="tasks" v-if="data.tasks">
           <li v-for="i in data.tasks" :key="i" v-html="i" />
         </ul>
@@ -69,5 +71,9 @@ export default {
 
 .tasks {
   font-weight: 300;
+  
+  li {
+    line-height: 16px;
+  }
 }
 </style>

@@ -30,6 +30,8 @@
   --main-blocks-title-icon-offset-left: -19pt;
 }
 
+
+
 body {
   width: var(--page-width);
   height: var(--page-height);
@@ -59,7 +61,7 @@ li {
   float: left;
   width: var(--main-width);
   height: var(--page-height);
-  padding: 0.65in 0.25in 0 0.25in;
+  padding: 1in 0.25in 0 0.25in;
   font-size: 7pt;
 }
 
