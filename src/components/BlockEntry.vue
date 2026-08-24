@@ -71,7 +71,7 @@ export default {
 
 .tasks {
   font-weight: 300;
-  
+
   li {
     line-height: 16px;
   }

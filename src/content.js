@@ -171,7 +171,8 @@ export default {
             'Définition et application des standards de génie logiciel',
             'Coordination technique et assistance à la gestion de projet',
             'Conduite de revues de code et assurance qualité',
-            'Encadrement des junior sur les bonnes pratiques et outils de développement moderne',
+            'Encadrement de juniors sur les bonnes pratiques et outils de développement moderne',
+            "<b class='accent'>JS, Jquery, Python, Vue.js 2/3, Django</b>",
           ],
         },
         {
@@ -181,10 +182,10 @@ export default {
           fromDate: '2021',
           toDate: '2020',
           tasks: [
-            'Générateur de sites web vitrine au contenu dynamique à l\'administration simplifiée',
-            'Produit visant les personnes n\'ayant pas le temps/envie d\'apprendre à utiliser Wix',
-            'Architecturée de façon à pouvoir évoluer vers une distribution sous forme de SAAS',
-            'Multiples instances en production',
+            'Générateur de sites web vitrine au contenu dynamique ultra simple à administrer',
+            'Produit visant les personnes n\'ayant pas le temps d\'apprendre à utiliser Wix',
+            'Multiples instances en production: fromageriesa.ch, jura-coiffure.ch',
+            "<b class='accent'>Nuxt.js, Node, Django</b>",
           ],
         },
         {
@@ -195,6 +196,7 @@ export default {
           toDate: '',
           tasks: [
             'Site web avec CMS sur mesure en vue de rendre l\'administration aussi simple que possible',
+            "<b class='accent'>Nuxt.js, Django</b>",
           ],
         },
         {
