@@ -18,8 +18,8 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
+    "sass": "^1.77.8",
     "sass-loader": "^9.0.2",
     "vue-template-compiler": "^2.6.11"
   },
