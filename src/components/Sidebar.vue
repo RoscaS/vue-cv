@@ -63,10 +63,9 @@ export default {
   flex-direction: column;
   /* Pinned to the top, not centred: centring divides whatever slack is left, so the
      name landed at a different height in each language. --sidebar-offset (set by
-     alignSidebar() in App.vue) then aligns the name with the first section heading,
+     alignSidebar() in App.vue) then aligns the name with the first entry's title,
      identically in both languages. */
   justify-content: flex-start;
-  padding-top: var(--sidebar-offset, 0);
 }
 
 /* group label: the category. Darker and heavier than the list it introduces. */

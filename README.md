@@ -143,10 +143,12 @@ check `cv-fr.pdf` after moving them.
   it to the printable height, not the 11.69in sheet: the html box starts below the top `@page`
   margin, so the sheet height spills a strip onto page 2.
 - The sidebar is top-aligned, and `alignSidebar()` in `App.vue` lines the name up with the first
-  section heading. Centring it looked fine in one language and wrong in the other, because it
-  divides whatever slack is left and the two locales have different amounts. The photo is 77px so
-  the name reaches that line without the column being pushed down — French has no vertical slack
-  to give, and pushing it cost a third page.
+  entry's title. Centring it looked fine in one language and wrong in the other, because it
+  divides whatever slack is left and the two locales have different amounts. The offset is set as
+  `--sidebar-offset` on the `#sidebar` rule in this file, not in `Sidebar.vue`: the ID rule
+  outranks the component's scoped class and wins the `padding` shorthand. If the name ever sits
+  *lower* than the target, the main column is pushed down instead (`--main-offset`) — watch the
+  page count when that happens, French has no vertical slack and a push costs a third page.
   Keep it shorter than one page: it is a single column with no continuation, and centring clips
   rather than flows if it outgrows the page.
   `./scripts/measure.sh` prints where it ends. It measures `#contact` and `.side-block-element`,

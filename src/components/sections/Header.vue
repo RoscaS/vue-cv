@@ -27,14 +27,12 @@ export default {
 }
 
 .picture {
-  /* Sized so the name lands level with the first section heading in the main column
-     without pushing that column down — French has no vertical slack to give. */
   margin-bottom: 12px;
   margin-left: auto;
   margin-right: auto;
   background-color: #e2e2e2;
   border-radius: 50%;
-  width: 77px;
-  height: 77px;
+  width: 100px;
+  height: 100px;
 }
 </style>

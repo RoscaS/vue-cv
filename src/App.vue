@@ -30,8 +30,8 @@ export default {
   },
   methods: {
     fit() {
-      this.fitTimeline();
       this.alignSidebar();
+      this.fitTimeline();
     },
 
     // The fill-page entry closes a page: run its timeline to the foot of that page
@@ -45,24 +45,25 @@ export default {
       el.style.setProperty("--fill-page-height", Math.max(0, Math.round(remainder)) + "px");
     },
 
-    // Line the name up with the first section heading. Whichever sits higher gets
-    // pushed down, so it holds in any language: the sidebar can't simply be padded
-    // to match, since the photo above the name would clip off the top of the sheet.
+    // Line the name up with the first entry's title. Whichever sits higher gets pushed
+    // down, so it holds in any language — but keep an eye on the main column: French
+    // has no vertical slack, and pushing it down costs a third page.
     alignSidebar() {
       const sidebar = document.querySelector("#sidebar");
       const main = document.querySelector("#main");
       const name = document.querySelector("#sidebar h1");
-      const heading = document.querySelector("#main .main-block h2");
+      const heading = document.querySelector("#main .blocks .title");
       if (!sidebar || !main || !name || !heading) return;
 
       sidebar.style.removeProperty("--sidebar-offset");
       main.style.removeProperty("--main-offset");
+
+      // rounded to whole pixels, so the two can sit 1px apart — below print resolution
       const delta = Math.round(
         heading.getBoundingClientRect().top - name.getBoundingClientRect().top
       );
       if (delta > 0) {
-        const pad = parseFloat(getComputedStyle(sidebar).paddingTop) || 0;
-        sidebar.style.setProperty("--sidebar-offset", pad + delta + "px");
+        sidebar.style.setProperty("--sidebar-offset", delta + "px");
       } else if (delta < 0) {
         main.style.setProperty("--main-offset", -delta + "px");
       }
