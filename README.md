@@ -129,10 +129,14 @@ it under that, since the sidebar is a single column with no second column to con
   margin between rows shows up as a break in the line), between sections ~27px.
 - `.blocks:last-child .decorator` has no bottom margin. It used to be `0.25in` to taper the
   timeline, which now cuts it off above the `stack` line at the foot of an entry.
+- Page breaks inside entries: `.blocks + .blocks` gets `break-inside: avoid`, so every entry
+  after the first in a section stays whole. The **first** entry of a section deliberately does
+  not — Arcanite is taller than one page in French, and forcing it whole pushes it to page 2,
+  empties page 1 and costs a third page. Use `.blocks + .blocks`, never `:not(:first-child)`:
+  the section's `h2` is the first child, so that selector matches every entry, Arcanite included.
+  If a later entry ever grows past a page, it needs the same exemption.
 - An entry's header is kept with what follows (`break-after: avoid` on `.details > header`), so a
-  title is never stranded at the foot of a page. Do **not** put `break-inside: avoid` on `.blocks`:
-  an entry taller than one page (Arcanite in French) is then pushed whole to the next page instead
-  of splitting, which empties the first page and costs a third one.
+  title is never stranded at the foot of a page.
 - Check both languages after any layout change — French runs ~10% longer than English and hits
   page limits first: `npm run pdf cv-en.pdf && VUE_APP_LANG=fr npm run pdf cv-fr.pdf`.
 - **Printing from Chrome's own dialog: leave Margins on "Default" and tick "Background graphics".**

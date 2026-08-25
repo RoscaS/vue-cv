@@ -193,11 +193,19 @@ h2 {
   padding-bottom: 0.15in;
 }
 
-/* Never strand an entry's title at the foot of a page — but do NOT put
-   break-inside: avoid on .blocks itself. An entry taller than one page (Arcanite
-   in French) is then pushed whole to the next page instead of splitting, which
-   leaves the first page empty and costs a third page. Keeping the header with
-   what follows is enough. */
+/* Entries after the first in a section are kept whole: they are short, and letting
+   one split mid-project reads as a mistake. NOT applied to the first entry of a
+   section — note the selector is `.blocks + .blocks`, not `:not(:first-child)`: the section's
+   h2 is the first child, so the latter matches every entry. Arcanite is taller than a page in
+   French, and forcing it whole pushes it
+   to page 2, leaving page 1 empty and costing a third page. It has to be free to split.
+   If a later entry ever grows past a page, it needs this exemption too. */
+.blocks + .blocks {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Never strand an entry's title at the foot of a page. */
 .blocks .details > header {
   break-inside: avoid;
   page-break-inside: avoid;
