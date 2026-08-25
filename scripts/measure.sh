@@ -19,9 +19,12 @@ window.addEventListener('load', function () {
       out.push(b.querySelector('h2 .title').textContent + ' ends at ' +
                Math.round(b.getBoundingClientRect().bottom) + 'px');
     });
-    var sbs = document.querySelectorAll('#sidebar .side-block');
+    /* NOT '.side-block': that matches the empty #disclamer, which margin-top:auto
+       pins to the bottom, so it reported a constant regardless of content. */
+    var sbs = document.querySelectorAll('#sidebar #contact, #sidebar .side-block-element');
     out.push('SIDEBAR content ends at ' +
-             Math.round(sbs[sbs.length - 1].getBoundingClientRect().bottom) + 'px');
+             Math.round(sbs[sbs.length - 1].getBoundingClientRect().bottom) +
+             'px (one page = ' + Math.round(PAGE) + 'px)');
     var blocks = document.querySelectorAll('#main .main-block');
     var end = Math.round(blocks[blocks.length - 1].getBoundingClientRect().bottom);
     out.push('CONTENT ENDS ' + end + 'px = page ' + (end / PAGE).toFixed(2) +

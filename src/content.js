@@ -100,7 +100,6 @@ export default {
         {
           title: 'Independent developer',
           place: 'Freelance',
-          url: 'generic-website.com',
           fromDate: '2021',
           toDate: '2018',
           subEntries: [
@@ -114,6 +113,7 @@ export default {
             {
               title: 'Generic Website',
               subtitle: 'landing-page generator',
+              url: 'generic-website.com',
               tasks: [
                 'Landing pages generator with an extremely easy way to manage the content',
                 'Subscription billing for the service',
@@ -122,7 +122,7 @@ export default {
             },
             {
               title: 'Swiss Association of Occupational Therapists',
-              subtitle: 'snase.ch',
+              url: 'snase.ch',
               tasks: [
                 'Website with a custom CMS, with a complete but extremely simple administration',
               ],

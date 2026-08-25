@@ -31,7 +31,10 @@
               <span v-html="sub.title" />
               <span class="sub-subtitle" v-if="sub.subtitle" v-html="sub.subtitle" />
             </h4>
-            <span class="sub-date" v-if="sub.date">{{ sub.date }}</span>
+            <span class="sub-meta" v-if="sub.date || sub.url">
+              <span class="sub-date" v-if="sub.date">{{ sub.date }}</span>
+              <span class="url" v-if="sub.url">{{ sub.url }}</span>
+            </span>
           </header>
           <span class="sub-description" v-if="sub.description" v-html="sub.description" />
           <ul class="tasks" v-if="sub.tasks && sub.tasks.length">

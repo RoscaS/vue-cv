@@ -422,6 +422,18 @@ h2 {
   content: " — ";
 }
 
+.sub-meta {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: baseline;
+  column-gap: 8pt;
+  white-space: nowrap;
+}
+
+.sub-header .url {
+  font-size: 7pt;
+}
+
 .sub-date {
   flex: 0 0 auto;
   font-size: 7pt;
