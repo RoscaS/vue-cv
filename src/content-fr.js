@@ -57,6 +57,7 @@ export default {
           toDate: '2021',
           description: "Société suisse de génie logiciel, ~45 collaborateurs, fondée en 2016 par des diplômés de l'EPFL, autofinancée. Sur site jusqu'en 2024, puis 80 % en télétravail. Neuf produits en cinq ans, dans des équipes de deux à six personnes, du SPA au monolithe Django vieux de dix ans. J'ai travaillé principalement sur le front-end mais régulièrement sur le back-end, et je suis resté assez longtemps sur la plupart de ces produits pour les maintenir en production pendant des années. Comme référent front-end, j'ai relu le travail de l'équipe, participé activement aux discussions de conception et d'architecture, répondu aux questions sur l'ensemble des projets et travaillé sur les guidelines front-end de l'entreprise.",
           stack: 'Python, Django, Vue 2/3, TypeScript, jQuery, GitLab CI, Docker',
+          fillPage: true,
           subEntries: [
             {
               title: 'AbaHost',
@@ -100,6 +101,7 @@ export default {
         {
           title: 'Développeur indépendant',
           place: 'Freelance',
+          breakBefore: true,
           fromDate: '2021',
           toDate: '2018',
           subEntries: [

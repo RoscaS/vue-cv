@@ -57,6 +57,7 @@ export default {
           toDate: '2021',
           description: "Swiss software engineering firm, ~45 people, founded 2016 by EPFL alumni, self-financed. On site until 2024, then 80% remote. Nine products in five years, in teams of two to six, ranging from SPAs to a decade-old Django monolith. I worked mainly on the frontend but regularly on the backend too, and I stayed with most of these products long enough to maintain them in production for years. As frontend referent I reviewed the team's work, actively participated in design and architectural discussions, answered questions across projects and worked on the company frontend guidelines.",
           stack: 'Python, Django, Vue 2/3, TypeScript, jQuery, GitLab CI, Docker',
+          fillPage: true,
           subEntries: [
             {
               title: 'AbaHost',
@@ -100,6 +101,7 @@ export default {
         {
           title: 'Independent developer',
           place: 'Freelance',
+          breakBefore: true,
           fromDate: '2021',
           toDate: '2018',
           subEntries: [

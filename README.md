@@ -110,6 +110,24 @@ on the block) — otherwise TECH STACK jumps whole to page 2 and leaves page 1's
 empty. `./scripts/measure.sh` reports where the sidebar ends against the one-page limit; keep
 it under that, since the sidebar is a single column with no second column to continue into.
 
+## Page breaks — `fillPage` and `breakBefore`
+
+Where a page break falls is a content decision, so it lives in `src/content.js`, per locale:
+
+```js
+{ title: 'Arcanite Solutions SA', fillPage: true,   … }   // closes page 1
+{ title: 'Independent developer',  breakBefore: true, … }  // opens page 2
+```
+
+`breakBefore` forces the break and adds the page's top gutter as padding, since `@page` margins
+can't be relied on. `fillPage` carries the timeline down to the foot of the page after the
+entry's content ends — an absolutely positioned 1px overflow that the break clips, so it adds no
+height. They are a pair: `fillPage` on an entry that is *not* last on its page draws a line over
+whatever follows it.
+
+Both locales need their own flags, and the right entry differs — French runs ~10% longer, so
+check `cv-fr.pdf` after moving them.
+
 ## Layout notes
 
 - `@page` has 0.3in vertical margins so text never runs to the paper edge on a break;

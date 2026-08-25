@@ -1,5 +1,8 @@
 <template>
-  <div class="blocks">
+  <div
+    class="blocks"
+    :class="{ 'fill-page': data.fillPage, 'break-before': data.breakBefore }"
+  >
     <div class="date">
       <span v-if="data.fromDate">{{ data.fromDate }}</span>
       <span v-if="data.toDate">{{ data.toDate }}</span>

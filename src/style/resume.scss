@@ -1,10 +1,10 @@
 @page {
   size: A4 portrait;
-  /* Vertical margins only: they give every page a bottom (and page-2 top) gutter,
-     so text never runs to the paper edge on a break. The grey sidebar band is
-     painted as a body background, which propagates to the canvas and still bleeds
-     to the edges. Horizontal margins stay 0 for that reason. */
-  margin: 0.3in 0;
+  /* Zero, so the result is the same whether Chrome's print dialog says None or
+     Default. Page-1 gutters are #main's and #sidebar's own padding; the page-2
+     gutter is the .break-before rule below, since @page margins can't be relied on
+     (the dialog overrides them). */
+  margin: 0;
 }
 
 * {
@@ -36,11 +36,11 @@
 
 
 
-/* The grey sidebar band lives on the root element so it bleeds to the paper edges,
-   margins included. It is sized to one sheet and not repeated: the sidebar's content
-   fits on page 1, so a band running down page 2 would be an empty grey column. It is sized to
-   the printable height, not the sheet: the html box starts below the top @page margin, so sizing
-   it to the full sheet spills a strip onto page 2.
+/* The grey sidebar band lives on the root element so it bleeds to the paper edges.
+   One sheet, not repeated: the sidebar's content fits on page 1, so a band running
+   down page 2 would be an empty grey column. With zero page margins, page 1's box is
+   exactly A4, so the sheet height is the right size — it reaches the foot of page 1
+   without spilling a strip onto page 2.
    Check ./scripts/measure.sh if the sidebar ever grows past one page. */
 html {
   background-image: linear-gradient(
@@ -49,7 +49,7 @@ html {
     #f2f2f2 var(--main-width) var(--page-width)
   );
   background-repeat: no-repeat;
-  background-size: 100% var(--page-height);
+  background-size: 100% 11.69in;
 }
 
 body {
@@ -203,6 +203,31 @@ h2 {
 .blocks + .blocks {
   break-inside: avoid;
   page-break-inside: avoid;
+}
+
+/* fillPage: carry the timeline down to the foot of the page after the entry's content
+   ends. Absolutely positioned overflow, so it adds no height and the page break clips
+   it. Only meaningful on the entry that is last on its page — pair it with breakBefore
+   on the next one, or it draws over what follows. */
+.blocks.fill-page {
+  position: relative;
+}
+
+.blocks.fill-page::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: var(--date-block-width);
+  width: 1px;
+  height: 100vh;
+  background: #ccc;
+}
+
+/* breakBefore: open a new page, with a gutter of its own since @page has none. */
+.blocks.break-before {
+  page-break-before: always;
+  break-before: page;
+  padding-top: 0.45in;
 }
 
 /* Never strand an entry's title at the foot of a page. */
