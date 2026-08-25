@@ -114,8 +114,11 @@ it under that, since the sidebar is a single column with no second column to con
 
 - `@page` has 0.3in vertical margins so text never runs to the paper edge on a break;
   horizontal margins stay 0. `--page-height` is the printable height, A4 minus those margins.
-- The grey sidebar band is a gradient on `html`, not a background on `#sidebar` — a background
-  on the sidebar box stopped at the first page break and left page 2 half white.
+- The grey sidebar band is a gradient on `html`, not a background on `#sidebar`, so it bleeds to
+  the paper edges. It is `no-repeat` and sized to `var(--page-height)` so it paints page 1 only —
+  the sidebar's content fits on one page, so a band on page 2 would be an empty grey column. Size
+  it to the printable height, not the 11.69in sheet: the html box starts below the top `@page`
+  margin, so the sheet height spills a strip onto page 2.
 - Keep the sidebar shorter than one page: it is a single column with no continuation.
   `./scripts/measure.sh` prints where it ends. It measures `#contact` and `.side-block-element`,
   not `.side-block` — the latter matches the empty `#disclamer`, which `margin-top: auto` pins to
@@ -132,6 +135,10 @@ it under that, since the sidebar is a single column with no second column to con
   of splitting, which empties the first page and costs a third one.
 - Check both languages after any layout change — French runs ~10% longer than English and hits
   page limits first: `npm run pdf cv-en.pdf && VUE_APP_LANG=fr npm run pdf cv-fr.pdf`.
+- **Printing from Chrome's own dialog: leave Margins on "Default" and tick "Background graphics".**
+  "Margins: None" discards the `@page` rule, and with it the gutter that keeps page 2's first line
+  off the paper edge. Default keeps the gutter; the band still bleeds, because a background on
+  `html` propagates to the page canvas regardless.
 - **Printing from Chrome's own dialog needs "Background graphics" ticked.** The grey sidebar band
   is a gradient background, and the timeline dots are background-coloured pseudo-elements; without
   it the band disappears and the white masking circle leaves gaps in the timeline. `npm run pdf`

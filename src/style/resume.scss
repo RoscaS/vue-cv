@@ -36,15 +36,20 @@
 
 
 
-/* The grey sidebar band lives on the root element so it paints across every page,
-   margins included, instead of stopping at the first page break like the old
-   background-color on a page-tall #sidebar did. */
+/* The grey sidebar band lives on the root element so it bleeds to the paper edges,
+   margins included. It is sized to one sheet and not repeated: the sidebar's content
+   fits on page 1, so a band running down page 2 would be an empty grey column. It is sized to
+   the printable height, not the sheet: the html box starts below the top @page margin, so sizing
+   it to the full sheet spills a strip onto page 2.
+   Check ./scripts/measure.sh if the sidebar ever grows past one page. */
 html {
-  background: linear-gradient(
+  background-image: linear-gradient(
     to right,
     #fff 0 var(--main-width),
     #f2f2f2 var(--main-width) var(--page-width)
   );
+  background-repeat: no-repeat;
+  background-size: 100% var(--page-height);
 }
 
 body {
