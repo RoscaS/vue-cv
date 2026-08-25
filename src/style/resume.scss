@@ -230,11 +230,41 @@ h2 {
   background: #ccc;
 }
 
-/* breakBefore: open a new page, with a gutter of its own since @page has none. */
+/* breakBefore: open a new page, with a gutter of its own since @page has none.
+   The padding goes on .details, not on .blocks: the timeline is the decorator's
+   border and it stretches to the row, so padding on the row itself starts the line
+   below the gutter instead of at the top of the page. */
 .blocks.break-before {
+  --page-gutter: 0.45in;
   page-break-before: always;
   break-before: page;
-  padding-top: 0.45in;
+}
+
+/* The gutter is added inside the row, to each column and to the dot, rather than to
+   the row itself: the timeline is the decorator's border and stretches to the row, so
+   padding on .blocks would start the line below the gutter instead of at the top of
+   the page. !important because .date and .details set padding-top with their own. */
+.blocks.break-before .details {
+  padding-top: calc(
+    var(--row-blocks-padding-top) - 0.5pt + var(--page-gutter)
+  ) !important;
+}
+
+.blocks.break-before .date {
+  padding-top: calc(
+    var(--row-blocks-padding-top) + 2.5pt + var(--page-gutter)
+  ) !important;
+}
+
+.blocks.break-before .decorator::before {
+  top: calc(var(--decorator-outer-offset-top) + var(--page-gutter));
+}
+
+.blocks.break-before .decorator::after {
+  top: calc(
+    var(--decorator-outer-offset-top) + var(--decorator-border-width) +
+      var(--page-gutter)
+  );
 }
 
 /* Never strand an entry's title at the foot of a page. */

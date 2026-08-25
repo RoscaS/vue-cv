@@ -119,8 +119,11 @@ Where a page break falls is a content decision, so it lives in `src/content.js`,
 { title: 'Independent developer',  breakBefore: true, … }  // opens page 2
 ```
 
-`breakBefore` forces the break and adds the page's top gutter as padding, since `@page` margins
-can't be relied on. `fillPage` carries the timeline down to the foot of the page after the
+`breakBefore` forces the break and adds the page's top gutter, since `@page` margins can't be
+relied on. The gutter goes *inside* the row — on `.date`, `.details` and the dot's offset, via
+`--page-gutter` — not on `.blocks` itself: the timeline is the decorator's border and stretches
+to the row, so padding on the row starts the line below the gutter instead of at the top of the
+page. It needs `!important`, because `.date` and `.details` set their own padding that way. `fillPage` carries the timeline down to the foot of the page after the
 entry's content ends: an absolutely positioned 1px overflow whose height `fitTimeline()` in
 `App.vue` measures after layout. It has to be measured — the gap is 98px in English and 17px in
 French — and a fixed height overruns onto the next page, where it paints straight through every
