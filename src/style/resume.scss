@@ -1,15 +1,10 @@
 @page {
   size: A4 portrait;
-  /* Vertical margins only — horizontal stay 0 so the grey band bleeds to the edges.
-     Pages after the first get a real top gutter, so the first line of page 2 is not
-     jammed against the paper edge. */
-  margin: 0.5in 0 0.3in;
-}
-
-@page :first {
-  /* Page 1 starts at the paper edge: #main's own 0.7in padding is its gutter, and
-     the grey band has to reach the top of the sheet. */
-  margin-top: 0;
+  /* Vertical margins only: they give every page a bottom (and page-2 top) gutter,
+     so text never runs to the paper edge on a break. The grey sidebar band is
+     painted as a body background, which propagates to the canvas and still bleeds
+     to the edges. Horizontal margins stay 0 for that reason. */
+  margin: 0.3in 0;
 }
 
 * {
@@ -54,9 +49,7 @@ html {
     #f2f2f2 var(--main-width) var(--page-width)
   );
   background-repeat: no-repeat;
-  /* exactly the height of page 1's box: the sheet minus its bottom @page margin.
-     Larger spills a grey strip onto page 2; smaller leaves white at the foot. */
-  background-size: 100% calc(11.69in - 0.3in);
+  background-size: 100% var(--page-height);
 }
 
 body {
@@ -88,18 +81,6 @@ li {
   min-height: var(--page-height);
   padding: 0.7in 0.25in 0.4in 0.25in;
   font-size: 7pt;
-
-  /* The timeline is one continuous line painted down #main, so it reaches the
-     foot of a page instead of stopping where the last entry's content ends, and
-     resumes at the very top of the next page. The per-row decorators keep their
-     dots; only their border-left moved here. */
-  background-image: linear-gradient(#ccc, #ccc);
-  background-repeat: no-repeat;
-  background-position: calc(
-      0.25in + var(--date-block-width) + var(--decorator-horizontal-margin)
-    )
-    0;
-  background-size: 1px 100%;
 }
 
 #sidebar {
@@ -169,9 +150,7 @@ h2 {
 }
 
 #main h2::after {
-  /* Was a stub extending the per-row decorator line through the heading. The
-     timeline is now one continuous line on #main, so this only double-draws. */
-  display: none;
+  /* extends the decorator line */
   height: calc(var(--row-blocks-padding-top) * 2);
   position: relative;
   top: calc(-1 * var(--row-blocks-padding-top));
@@ -265,7 +244,7 @@ h2 {
   position: relative;
   width: 2pt;
   min-height: 100%;
-  /* the line itself is painted on #main; this element only carries the dot */
+  border-left: var(--decorator-border);
 }
 
 /*

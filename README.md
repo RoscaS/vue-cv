@@ -112,21 +112,13 @@ it under that, since the sidebar is a single column with no second column to con
 
 ## Layout notes
 
-- `@page` has `0.5in 0 0.3in`, and `@page :first` resets `margin-top: 0`. Page 1 starts at the
-  paper edge (its gutter is `#main`'s own 0.7in padding, and the grey band has to reach the top
-  of the sheet); later pages get a real top gutter so page 2's first line is not jammed against
-  the edge. Horizontal margins stay 0 so the band bleeds sideways.
-- The timeline is one continuous line painted as a background on `#main`, not the per-row
-  `.decorator` borders. As borders it stopped wherever the last entry's content ended, leaving a
-  stub of blank page below it, and restarted mid-page after a break. The decorators now carry
-  only their dots, and `#main h2::after` — the old stub that extended the line through a heading —
-  is `display: none`.
+- `@page` has 0.3in vertical margins so text never runs to the paper edge on a break;
+  horizontal margins stay 0. `--page-height` is the printable height, A4 minus those margins.
 - The grey sidebar band is a gradient on `html`, not a background on `#sidebar`, so it bleeds to
   the paper edges. It is `no-repeat` and sized to `var(--page-height)` so it paints page 1 only —
   the sidebar's content fits on one page, so a band on page 2 would be an empty grey column. Size
-  it to `calc(11.69in - 0.3in)` — page 1's box is the sheet minus its bottom margin, since
-  `@page :first` zeroes the top one. Larger spills a grey strip onto page 2; smaller leaves white
-  at the foot of page 1.
+  it to the printable height, not the 11.69in sheet: the html box starts below the top `@page`
+  margin, so the sheet height spills a strip onto page 2.
 - Keep the sidebar shorter than one page: it is a single column with no continuation.
   `./scripts/measure.sh` prints where it ends. It measures `#contact` and `.side-block-element`,
   not `.side-block` — the latter matches the empty `#disclamer`, which `margin-top: auto` pins to
