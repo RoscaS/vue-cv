@@ -188,11 +188,16 @@ h2 {
   padding-bottom: 0.15in;
 }
 
-/* never strand an entry's title at the foot of a page. An entry taller than a
-   page (Arcanite) is broken anyway — the browser falls back when it must. */
-.blocks {
+/* Never strand an entry's title at the foot of a page — but do NOT put
+   break-inside: avoid on .blocks itself. An entry taller than one page (Arcanite
+   in French) is then pushed whole to the next page instead of splitting, which
+   leaves the first page empty and costs a third page. Keeping the header with
+   what follows is enough. */
+.blocks .details > header {
   break-inside: avoid;
   page-break-inside: avoid;
+  break-after: avoid;
+  page-break-after: avoid;
 }
 
 .blocks > div {

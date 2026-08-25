@@ -126,8 +126,12 @@ it under that, since the sidebar is a single column with no second column to con
   margin between rows shows up as a break in the line), between sections ~27px.
 - `.blocks:last-child .decorator` has no bottom margin. It used to be `0.25in` to taper the
   timeline, which now cuts it off above the `stack` line at the foot of an entry.
-- Entries never split across a page break (`break-inside: avoid` on `.blocks`), so a title is
-  never stranded at the foot of a page.
+- An entry's header is kept with what follows (`break-after: avoid` on `.details > header`), so a
+  title is never stranded at the foot of a page. Do **not** put `break-inside: avoid` on `.blocks`:
+  an entry taller than one page (Arcanite in French) is then pushed whole to the next page instead
+  of splitting, which empties the first page and costs a third one.
+- Check both languages after any layout change — French runs ~10% longer than English and hits
+  page limits first: `npm run pdf cv-en.pdf && VUE_APP_LANG=fr npm run pdf cv-fr.pdf`.
 - **Printing from Chrome's own dialog needs "Background graphics" ticked.** The grey sidebar band
   is a gradient background, and the timeline dots are background-coloured pseudo-elements; without
   it the band disappears and the white masking circle leaves gaps in the timeline. `npm run pdf`
