@@ -28,8 +28,17 @@ Do not print from the browser's own dialog — it adds headers and its own margi
 
 ## Content format — `src/content.js`
 
-One file per branch/language. `VUE_APP_LANG=fr npm run pdf cv-fr.pdf` picks up
-`src/content.fr.js` if that file exists, otherwise falls back to `src/content.js`.
+Two locales are bundled: `src/content.js` (en) and `src/content-fr.js` (fr). They have the
+same shape; edit both, or they drift.
+
+`VUE_APP_LANG=fr npm run pdf cv-fr.pdf` sets the language the build starts in — that is how a
+PDF of one language is printed. In the browser, the **language toggle** in the top-left corner
+switches at runtime: it is invisible until hovered, absolutely positioned so it never affects
+layout, and `display: none` when printing. `src/mixins/content.js` holds the locale map and a
+`Vue.observable` language, so flipping it re-renders everything.
+
+Adding a locale means adding the file, importing it in the mixin's `locales` map, and writing
+the translation — the toggle picks up the extra button on its own.
 
 An entry in `blocks[].entries[]`:
 
