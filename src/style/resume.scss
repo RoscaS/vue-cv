@@ -13,8 +13,8 @@
 
 :root {
   --page-width: 8.27in;
-  /* printable height = A4 (11.69in) minus the @page vertical margins */
-  --page-height: 11.09in;
+  /* @page margins are zero, so the printable height is the whole sheet */
+  --page-height: 11.69in;
   --main-width: 6in;
   --sidebar-width: calc(var(--page-width) - var(--main-width));
   --decorator-horizontal-margin: 0.2in;
@@ -49,7 +49,7 @@ html {
     #f2f2f2 var(--main-width) var(--page-width)
   );
   background-repeat: no-repeat;
-  background-size: 100% 11.69in;
+  background-size: 100% var(--page-height);
 }
 
 body {

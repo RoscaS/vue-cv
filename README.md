@@ -137,7 +137,9 @@ check `cv-fr.pdf` after moving them.
   the sidebar's content fits on one page, so a band on page 2 would be an empty grey column. Size
   it to the printable height, not the 11.69in sheet: the html box starts below the top `@page`
   margin, so the sheet height spills a strip onto page 2.
-- Keep the sidebar shorter than one page: it is a single column with no continuation.
+- The sidebar is vertically centred in page 1 (`justify-content: center` on `.sidebar-wrapper`).
+  Keep it shorter than one page: it is a single column with no continuation, and centring clips
+  rather than flows if it outgrows the page.
   `./scripts/measure.sh` prints where it ends. It measures `#contact` and `.side-block-element`,
   not `.side-block` — the latter matches the empty `#disclamer`, which `margin-top: auto` pins to
   the bottom of the page, so it reported a constant regardless of content.

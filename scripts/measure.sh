@@ -12,7 +12,7 @@ cat >> "$TMP/index.html" <<'JS'
 <script>
 window.addEventListener('load', function () {
   setTimeout(function () {
-    var PAGE = 11.09 * 96; // printable height, see @page in resume.scss
+    var PAGE = 11.69 * 96; // full A4 sheet: @page margins are zero
     var out = [];
     var main = document.querySelector('#main');
     document.querySelectorAll('.main-block').forEach(function (b) {

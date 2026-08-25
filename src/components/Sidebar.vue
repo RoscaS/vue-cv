@@ -61,6 +61,10 @@ export default {
 .sidebar-wrapper {
   display: flex;
   flex-direction: column;
+  /* centred in page 1 rather than pinned to the top: the content is shorter than
+     the page, and hanging it from the top left a deep empty band at the foot.
+     Only works while the sidebar fits one page — ./scripts/measure.sh checks that. */
+  justify-content: center;
 }
 
 /* group label: the category. Darker and heavier than the list it introduces. */
@@ -78,6 +82,7 @@ export default {
 }
 
 #disclamer {
-  margin-top: auto;
+  /* was margin-top: auto to pin it to the foot, which fights justify-content */
+  margin-top: 0;
 }
 </style>
