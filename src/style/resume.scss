@@ -3,7 +3,8 @@
   /* Zero, so the result is the same whether Chrome's print dialog says None or
      Default. Page-1 gutters are #main's and #sidebar's own padding; the page-2
      gutter is the .break-before rule below, since @page margins can't be relied on
-     (the dialog overrides them). */
+     (the dialog overrides them). The visual page margin is --page-margin, drawn
+     inside the sheet, not by @page. */
   margin: 0;
 }
 
@@ -15,11 +16,26 @@
   --page-width: 8.27in;
   /* @page margins are zero, so the printable height is the whole sheet */
   --page-height: 11.69in;
+  /* Visual margin drawn inside the sheet. A physical printer cannot bleed to the
+     paper edge: it insets by ~4mm of its own and the driver scales to fit, so a
+     full-bleed grey band came out as a rectangle stopping just short of the edges —
+     reading as a misprint rather than a design. Inset it deliberately by clearly more
+     than the printer's own margin and the printer's inset disappears into it. Uniform
+     scaling keeps a symmetric inset symmetric, so it survives fit-to-page. */
+  --page-margin: 0.3in;
+
+  --band-radius: 6pt;
+
+  /* The left gutter runs a touch tighter than the other three so the split can sit
+     back at its original 6in and the sidebar keep its original width. */
+  --page-margin-left: 0.2in;
+
   --main-width: 6in;
   --sidebar-width: calc(var(--page-width) - var(--main-width));
   --decorator-horizontal-margin: 0.2in;
 
-  --sidebar-horizontal-padding: 0.2in;
+  /* was 0.2in — tightened to buy back width lost to --page-margin */
+  --sidebar-horizontal-padding: 0.1in;
 
   /* XXX: using px for very good precision control */
   --decorator-outer-offset-top: 10px;
@@ -36,20 +52,33 @@
 
 
 
-/* The grey sidebar band lives on the root element so it bleeds to the paper edges.
-   One sheet, not repeated: the sidebar's content fits on page 1, so a band running
-   down page 2 would be an empty grey column. With zero page margins, page 1's box is
-   exactly A4, so the sheet height is the right size — it reaches the foot of page 1
-   without spilling a strip onto page 2.
-   Check ./scripts/measure.sh if the sidebar ever grows past one page. */
-html {
-  background-image: linear-gradient(
-    to right,
-    #fff 0 var(--main-width),
-    #f2f2f2 var(--main-width) var(--page-width)
-  );
-  background-repeat: no-repeat;
-  background-size: 100% var(--page-height);
+/* The grey sidebar band. An element rather than a gradient on <html>: it is a rounded
+   panel now, and border-radius has no equivalent on a background gradient.
+   Sized to page 1 only — the sidebar's content fits there, so a band running down page 2
+   would be an empty grey column. It is inset by --page-margin, so with @page margins at
+   zero it reaches the foot of page 1 without spilling a strip onto page 2.
+   Check ./scripts/measure.sh if the sidebar ever grows past one page.
+   print-color-adjust is required: an <html> background is the page canvas and always
+   prints, but an ordinary element's is dropped by default in print. */
+#sidebar-band {
+  position: absolute;
+  z-index: 0;
+  top: var(--page-margin);
+  left: var(--main-width);
+  right: var(--page-margin);
+  height: calc(var(--page-height) - (var(--page-margin) * 2));
+  border-radius: var(--band-radius);
+  /* was #f2f2f2 (~5% grey) — too faint once a laser printer halftones it. About as
+     dark as this can go: the sidebar's lightest text is #666. */
+  background-color: #e2e2e2;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* the band is positioned against #app, so the columns need a stacking context of their
+   own to paint over it */
+#app {
+  position: relative;
 }
 
 body {
@@ -79,7 +108,9 @@ li {
   float: left;
   width: var(--main-width);
   min-height: var(--page-height);
-  padding: 0.7in 0.25in 0.4in 0.25in;
+  /* left gutter is the page margin itself, so the text block sits the same distance
+     from the paper edge as the band does */
+  padding: 0.7in 0.25in var(--page-margin) var(--page-margin-left);
   /* alignSidebar() in App.vue nudges the column down when the sidebar's name sits
      lower than the first section heading — the photo above the name cannot be
      pulled any higher without clipping off the sheet. */
@@ -89,15 +120,19 @@ li {
 
 #sidebar {
   float: right;
-  position: relative; /* for disclaimer */
+  position: relative; /* for disclaimer, and to paint over #sidebar-band */
+  z-index: 1;
   width: var(--sidebar-width);
   min-height: var(--page-height);
   /* alignSidebar() in App.vue sets --sidebar-offset to line the name up with the
      first entry's title. Set here, not in Sidebar.vue: this ID rule outranks the
      component's scoped class and would otherwise win the shorthand. */
-  padding: calc(0.12in + var(--sidebar-offset, 0px))
-    var(--sidebar-horizontal-padding) 0.4in;
-  font-size: 8pt;
+  padding: calc(var(--page-margin) + var(--sidebar-offset, 0px))
+    calc(var(--page-margin) + var(--sidebar-horizontal-padding)) var(--page-margin)
+    var(--sidebar-horizontal-padding);
+  /* was 8pt — the band's inset narrows the column, and the sidebar has the least
+     vertical slack of anything on the sheet (see ./scripts/measure.sh) */
+  font-size: 7.5pt;
 }
 
 /* main */
@@ -239,7 +274,8 @@ h2 {
    border and it stretches to the row, so padding on the row itself starts the line
    below the gutter instead of at the top of the page. */
 .blocks.break-before {
-  --page-gutter: 0.45in;
+  /* matches --page-margin so page 2's text starts level with page 1's band top */
+  --page-gutter: var(--page-margin);
   page-break-before: always;
   break-before: page;
 }
@@ -438,13 +474,16 @@ h2 {
 
 /***** fine-tunes on the lists... *****/
 
+/* The list metrics below and .sub-entry's margin-top were each trimmed by a fraction
+   of a point to buy back the vertical space the larger sidebar photo costs the main
+   column. Invisible per instance; ~26px over page 1. */
 #main ul {
   padding-left: 0.07in;
-  margin: 0.08in 0;
+  margin: 0.07in 0;
 }
 
 #main li {
-  margin: 0 0 0.045in 0;
+  margin: 0 0 0.034in 0;
 }
 
 /****** customize list symbol style ******/
@@ -472,7 +511,7 @@ h2 {
 /***** sub-entries: named blocks sharing one date range *****/
 
 .sub-entry {
-  margin-top: 0.13in;
+  margin-top: 0.11in;
   break-inside: avoid;
   page-break-inside: avoid;
 }
@@ -550,8 +589,9 @@ h2 {
   font-size: 10pt;
 }
 
+/* was 0.165in — trimmed to keep the sidebar clear of the band's bottom inset */
 .side-block {
-  margin-top: 0.165in;
+  margin-top: 0.1in;
 }
 
 /* A long section (TECH STACK) flows across the page break rather than jumping
@@ -566,9 +606,9 @@ h2 {
   padding-left: 0;
   font-family: "Source Code Pro";
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.4;
   /* monospace is wide: check the longest line still fits if an address changes */
-  font-size: 8pt;
+  font-size: 7.25pt;
 }
 
 #contact li {
@@ -595,13 +635,13 @@ h2 {
 
 /* one labelled group per li: label line, then its list indented beneath */
 .side-block-element li {
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 
 #disclaimer {
   position: absolute;
-  bottom: var(--sidebar-horizontal-padding);
-  right: var(--sidebar-horizontal-padding);
+  bottom: var(--page-margin);
+  right: calc(var(--page-margin) + var(--sidebar-horizontal-padding));
   font-size: 7.5pt;
   font-style: italic;
   line-height: 1.1;

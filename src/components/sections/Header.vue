@@ -27,12 +27,17 @@ export default {
 }
 
 .picture {
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   margin-left: auto;
   margin-right: auto;
   background-color: #e2e2e2;
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  /* alignSidebar() pins the name to the first entry's title, so every px here pushes
+     the MAIN column down too — and page 1 of main is full to the band's foot. The
+     ceiling is main, not the sidebar: it was paid for by the small spacing trims in
+     resume.scss (.sub-entry, #main ul, #main li). Re-run ./scripts/measure.sh in FR,
+     which is the tight language, before growing it further. */
+  width: 88px;
+  height: 88px;
 }
 </style>

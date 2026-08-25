@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div id="sidebar-band" aria-hidden="true" />
     <LangToggle />
     <MainContent />
     <Sidebar id="sidebar" />
@@ -12,6 +13,9 @@ import Sidebar from "@/components/Sidebar";
 import LangToggle from "@/components/LangToggle";
 
 const PAGE_PX = 11.69 * 96; // A4 at 96dpi; @page margins are zero
+// --page-margin in resume.scss: the visual margin painted inside the sheet. The
+// timeline has to stop level with the grey band's bottom edge, not run off the paper.
+const PAGE_MARGIN_PX = 0.3 * 96;
 
 export default {
   name: "App",
@@ -41,7 +45,7 @@ export default {
       if (!el) return;
       el.style.removeProperty("--fill-page-height");
       const bottom = el.getBoundingClientRect().bottom + window.pageYOffset;
-      const remainder = PAGE_PX - (bottom % PAGE_PX);
+      const remainder = PAGE_PX - PAGE_MARGIN_PX - (bottom % PAGE_PX);
       el.style.setProperty("--fill-page-height", Math.max(0, Math.round(remainder)) + "px");
     },
 

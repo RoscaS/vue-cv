@@ -2,7 +2,7 @@ export default {
   firstname: 'Sol',
   lastname: 'Rosca',
   title: 'Senior Full-Stack Engineer',
-  basic: '39 years old, permit C',
+  basic: '39 years old, B permit, married, two children',
 
   sidebar: {
     contactSection: {
@@ -20,7 +20,6 @@ export default {
         entries: [
           { label: 'French, Romanian', items: 'Native' },
           { label: 'English', items: 'B2' },
-          { label: 'Dutch', items: 'Basic' },
         ],
       },
       {
@@ -55,7 +54,7 @@ export default {
           url: 'arcanite.ch',
           fromDate: '2026',
           toDate: '2021',
-          description: "Swiss software engineering firm, ~45 people, founded 2016 by EPFL alumni, self-financed. On site until 2024, then 80% remote. Nine products in five years, in teams of two to six, ranging from SPAs to a decade-old Django monolith. I worked mainly on the frontend but regularly on the backend too, and I stayed with most of these products long enough to maintain them in production for years. As frontend referent I reviewed the team's work, actively participated in design and architectural discussions, answered questions across projects and worked on the company frontend guidelines.",
+          description: "Swiss software firm, ~45 people, self-financed. Nine products in five years, in teams of two to six, ranging from SPAs to a decade-old Django monolith, and I stayed with most of them long enough to run them in production for years. Mainly frontend, regularly backend. As frontend referent I reviewed the team's code, took part in design and architecture decisions across projects, and helped maintain the company frontend guidelines.",
           stack: 'Python, Django, Vue 2/3, TypeScript, jQuery, GitLab CI, Docker',
           fillPage: true,
           subEntries: [
@@ -135,12 +134,36 @@ export default {
       ],
     },
     {
+      name: 'Education',
+      icon: 'fa-graduation-cap',
+      entries: [
+        {
+          title: 'BSc HES-SO in Computer Science',
+          place: 'HE-Arc Ingénierie',
+          location: 'Neuchâtel',
+          fromDate: '2020',
+          toDate: '2016',
+          description: 'Major in Software and Multimedia Development · Swiss HES engineering degree',
+          tasks: [],
+        },
+        {
+          title: 'CESS (general secondary)',
+          place: 'IFC Jonfosse',
+          location: 'Liège (BE)',
+          fromDate: '2013',
+          toDate: '2010',
+          description: 'Adult catch-up programme, the Belgian counterpart of the Swiss maturité gymnasiale',
+          tasks: [],
+        },
+      ],
+    },
+    {
       name: 'Earlier engineering projects',
       icon: 'fa-folder-open',
       entries: [
         {
           title: 'Engineering projects',
-          place: 'HE-Arc — sole author',
+          place: 'HE-Arc',
           fromDate: '2020',
           toDate: '2019',
           description: 'Built during my engineering degree, each with its own technical report.',
@@ -150,29 +173,6 @@ export default {
             "<b>Linor (2020)</b> — real-time lane detection in Python and OpenCV.",
           ],
           stack: 'Java, LibGDX, Unity, C#, Python, OpenCV',
-        },
-      ],
-    },
-    {
-      name: 'Education',
-      icon: 'fa-graduation-cap',
-      entries: [
-        {
-          title: 'BSc Computer Science & Engineering',
-          place: 'HE-Arc Ingénierie',
-          location: 'Neuchâtel',
-          fromDate: '2020',
-          toDate: '2016',
-          description: 'Swiss HES engineering degree, software development and multimedia',
-          tasks: [],
-        },
-        {
-          title: 'CESS (general secondary)',
-          place: 'IFC Jonfosse',
-          location: 'Liège (BE)',
-          fromDate: '2013',
-          toDate: '2010',
-          tasks: [],
         },
       ],
     },
