@@ -6,7 +6,7 @@
       <span class="primary"> {{ content.lastname }}</span>
     </h1>
     <div style="font-weight: 600; font-size: 14px" class="subtitle" v-html="content.title"></div>
-    <div style="margin-top: 1em" class="subtitle" v-html="content.basic"></div>
+    <div style="margin-top: 0.7em" class="subtitle" v-html="content.basic"></div>
   </div>
 </template>
 
@@ -27,12 +27,12 @@ export default {
 }
 
 .picture {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   margin-left: auto;
   margin-right: auto;
   background-color: #e2e2e2;
   border-radius: 100px;
-  width: 130px;
-  height: 130px;
+  width: 100px;
+  height: 100px;
 }
 </style>

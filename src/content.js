@@ -2,67 +2,42 @@ export default {
   firstname: 'Sol',
   lastname: 'Rosca',
   title: 'Senior Full-Stack Engineer',
-  basic: 'Python/Django · Vue/TypeScript<br>Les Breuleux (JU), Switzerland<br>Permit C<br>078 403 29 49<br>sol.rosca@protonmail.com',
+  basic: '39 years old, permit C',
 
   sidebar: {
     contactSection: {
       title: 'contact info',
-      entries: [],
+      entries: [
+        { icon: 'fa-map-marker', value: 'Les Breuleux (JU)' },
+        { icon: 'fa-phone', value: '078 403 29 49' },
+        { icon: 'fa-envelope', value: 'sol.rosca@gmail.com' },
+      ],
     },
     blocks: [
-      {
-        name: 'Backend',
-        icon: '',
-        entries: [
-          { value: 'Python, Django', complement: 'DRF, Django Ninja, Celery' },
-          { value: 'Databases:', complement: 'PostgreSQL, Elasticsearch' },
-          { value: 'pytest / TDD', complement: '' },
-        ],
-      },
-      {
-        name: 'Frontend',
-        icon: '',
-        entries: [
-          { value: 'Vue 2 & 3, TypeScript', complement: 'Nuxt, Quasar, Pinia, TanStack Query' },
-          { value: 'Vite, SCSS, Tailwind', complement: '' },
-          { value: 'jQuery, legacy JS', complement: '' },
-        ],
-      },
-      {
-        name: 'Platform',
-        icon: '',
-        entries: [
-          { value: 'GitLab CI/CD, Docker', complement: '' },
-          { value: 'Poetry, uv, Ruff, pnpm', complement: '' },
-          { value: 'Sentry, private registries', complement: '' },
-        ],
-      },
-      {
-        name: 'Also',
-        icon: '',
-        entries: [
-          { value: 'Design systems', complement: '' },
-          { value: 'API design, typed clients', complement: '' },
-          { value: 'Auth:', complement: 'JWT, OIDC, SAML, Azure AD' },
-          { value: 'i18n, Weblate', complement: '' },
-          { value: 'AI coding agents', complement: 'harnesses, workflow design' },
-        ],
-      },
-      {
-        name: 'Refreshing',
-        icon: '',
-        entries: [
-          { value: 'Java, C#, Unity', complement: 'engine work 2019–20' },
-        ],
-      },
       {
         name: 'Languages',
         icon: '',
         entries: [
-          { value: 'French:', complement: 'Native' },
-          { value: 'Romanian:', complement: 'Native' },
-          { value: 'English:', complement: 'B2' },
-          { value: 'Dutch:', complement: 'Basic' },
+          { label: 'French, Romanian', items: 'Native' },
+          { label: 'English', items: 'B2' },
+          { label: 'Dutch', items: 'Basic' },
+        ],
+      },
+      {
+        name: 'Tech stack',
+        icon: '',
+        entries: [
+          { label: 'Programming languages', items: 'Python, JavaScript, TypeScript, HTML, CSS/SCSS' },
+          { label: 'Back-end', items: 'Django, Django REST, Django Ninja, Flask, Celery, Firebase Cloud Functions, Digital Ocean Functions, pytest' },
+          { label: 'Front-end', items: 'Vue 2/3, Nuxt, Quasar, Vuetify, Shadcn, Bootstrap, Tanstack, DataTables, HTMX, jQuery' },
+          { label: 'Mobile', items: 'Capacitor, Cordova (Android & iOS)' },
+          { label: 'Databases', items: 'PostgreSQL, Elasticsearch, Firebase Realtime Database, Firestore' },
+          { label: 'DevOps', items: 'Linux, Shell/Bash, Docker, GitLab CI/CD, GitHub Workflows, Firebase CLI, Digital Ocean Registry' },
+          { label: 'Tooling', items: 'Poetry, uv, npm, pnpm, Ruff, Pre-commit, Sentry, Figma' },
+          { label: 'Payment systems', items: 'Chargebee, Stripe' },
+          { label: 'Architecture', items: 'Design systems, API design and typed clients, auth (JWT, Keycloak, SAML, Azure AD), i18n' },
+          { label: 'AI', items: 'Coding agents on production work, harnesses, agent workflow design' },
+          { label: 'Refreshing', items: 'Java, C#, Angular, React' },
         ],
       },
     ],
@@ -75,70 +50,104 @@ export default {
       entries: [
         {
           title: 'Arcanite Solutions SA',
-          place: 'Full-stack engineer, frontend referent',
+          place: 'Developer, frontend referent',
+          location: 'Puidoux (VD)',
           url: 'arcanite.ch',
           fromDate: '2026',
           toDate: '2021',
-          description: "Swiss software firm in Puidoux (VD), ~45 people; 80% remote from 2024. Frontend referent: led the frontend side of most projects and participated in their architecture, ran code review across teams, represented frontend in client meetings, helped design the frontend technical interview. Nine products in five years, from greenfield SPAs to a decade-old Django monolith.",
-          tasks: [
-            "<b>Agentic engineering task force (2026)</b> — internal group working out how the company should use AI coding agents: which tasks they suit, how to structure prompts and harnesses, where human review stays necessary. Daily practitioner on production code.",
-            "<b>AbaHost — private-cloud hosting for Abacus ERP (2022–2026).</b> Arcanite's own product: 600+ servers for 500+ Swiss companies through 20+ resellers, under a 99.7% SLA. Frontend owner and top human contributor for the final two years.",
-            "Architect of the control plane's UI rewrite: removed the vendored legacy theme (−8,600 lines), decomposed a 1,000-line base template, rebuilt every list, detail and edit screen across 20 of 21 Django apps.",
-            "Built the settings application, now in production: a greenfield Vue 3 + TypeScript vertical inside the monolith, Django Ninja API, OpenAPI-driven typed client generation, one server-side navigation tree serving two frontends.",
-            "Owned the modernisation toolchain — Vite, Tailwind, pnpm workspace, vue-tsc, a CI gate failing on stale build output, automated translation sync.",
-            "Fixed stored XSS, a privilege-escalation path in user impersonation, and unmasked API keys in logs.",
-            "<b>Compliance platform for Wecan, Geneva fintech (2023–2025).</b> Shared KYC/KYB network for private banks and independent asset managers, reported by the vendor as used by 100+ financial institutions including Pictet, Lombard Odier and UBP; built under the FinIA/FinSA regime.",
-            "Founding frontend engineer: created the codebase, chose the stack (Vue 3, Quasar, Vite, TypeScript, Pinia, TanStack Query), owned the platform layer for the application's entire two-year life.",
-            "Built transparent JWT refresh via HTTP interceptors, OIDC SSO, client-side OpenPGP key management, and a reusable answer vault so a KYC datum is entered once and shared across counterparties.",
-            "Set the quality strategy with no test framework in place: zero-warning lint gate, type checking in CI, i18n-key completeness gate, Sentry with CI source maps.",
-            "<b>Design system and shared libraries (2022–2026).</b> Founded the company's design system (Bootstrap 5 re-skinned to IBM Carbon) and owned its release engineering for 3.5 years: ~49 versions to a private registry through a gated CI pipeline.",
-            "Built per-branch living documentation — a demo site published automatically for every branch, garbage-collected on merge.",
-            "Sole author of a DataTables wrapper used across ~100 call sites. Later wrote the proposal to retire it: capability comparison, call-site inventory, migration costed at 16 developer-days, risk register.",
-            "<b>Medical-coding platform for SwissCoding Group (2021–2022).</b> Search and annotation over Switzerland's official ICD-10-GM and CHOP classifications. Bootstrapped the frontend from an empty repository and wrote ~three-quarters of it over the following year.",
-            "Designed a cross-stack component-injection pattern: the Django API wraps code references in custom tags the Vue client compiles at runtime, so rich previews are opt-in per client.",
-            "<b>Also:</b> maritime emissions analytics for Daphne Technology; PolyTicket, Arcanite's ticketing platform used for 100+ Swiss events; billing back-office for Abacus DeepCloud; four internal services as sole author.",
-            "<b class='accent'>Python, Django, Vue 2/3, TypeScript, jQuery, GitLab CI, Docker</b>",
+          description: "Swiss software engineering firm, ~45 people, founded 2016 by EPFL alumni, self-financed. On site until 2024, then 80% remote. Nine products in five years, in teams of two to six, ranging from SPAs to a decade-old Django monolith. I worked mainly on the frontend but regularly on the backend too, and I stayed with most of these products long enough to maintain them in production for years. As frontend referent I reviewed the team's work, actively participated in design and architectural discussions, answered questions across projects and worked on the company frontend guidelines.",
+          stack: 'Python, Django, Vue 2/3, TypeScript, jQuery, GitLab CI, Docker',
+          subEntries: [
+            {
+              title: 'AbaHost',
+              subtitle: 'private-cloud hosting for Abacus ERP',
+              date: '2022–2026',
+              description: "Arcanite's main product: 600+ hosted servers for 500+ Swiss companies, under a 99.7% contractual SLA. Main frontend contributor for the last 4 years, and regularly on the Django side behind it.",
+              tasks: [
+                "Daily maintenance of the project: bug fixes and Sentry reports, performance/scalability work, documentation, guidelines, coordination with the Hosting team.",
+                "Implemented the v2 design: removed the vendored legacy theme, designed and implemented the templating logic, UI elements and systems, reworked the views across 20 of 21 Django apps.",
+                "Designed and built the Abacus Server settings app: a modern Vue 3/TypeScript app living in the monolith, with a typed OpenAPI-documented Django Ninja API.",
+              ],
+            },
+            {
+              title: 'Compliance platform for Wecan',
+              subtitle: 'Geneva fintech',
+              date: '2023–2025',
+              description: "A shared KYC/KYB network for Swiss private banks and independent asset managers, used by many financial institutions including Pictet, Lombard Odier and UBP.",
+              tasks: [
+                "Took part in the design and architectural decisions.",
+                "Chose the stack (Vue 3, Quasar, Vite, Pinia, TanStack Query) and initiated the frontend development: routing, stores and layouting logic, then implemented most of the app frontend, under demanding design constraints and with the complexity the compliance workflows imposed on the interface.",
+              ],
+            },
+            {
+              title: 'Design system and shared libraries',
+              date: '2022–2026',
+              tasks: [
+                "Supervised and led the integration of the internal design system (Bootstrap 5 re-skinned to IBM Carbon) and maintained its release pipeline for three and a half years (~49 versions to a private registry, with documentation published automatically per branch).",
+                "Wrote and maintained a DataTables wrapper library used across ~100 call sites, and later evaluated and costed a proposal to retire it.",
+              ],
+            },
+            {
+              title: 'Other projects at Arcanite',
+              tasks: [
+                "Main frontend developer on a medical-coding search platform for SwissCoding, a search and annotation tool over the official Swiss ICD-10-GM and CHOP classifications that hospital reimbursement depends on.",
+                "Led and implemented the frontend for a maritime fleet-emissions dashboard for Daphne Technology: vessels by IMO number, per-gas time series from InfluxDB, Mapbox fleet map.",
+                "Developed and maintained multiple internal services.",
+              ],
+            },
           ],
         },
         {
-          title: 'Generic Website',
-          place: 'Founder / Independent',
-          url: 'generic-website.ch',
+          title: 'Independent developer',
+          place: 'Freelance',
+          url: 'generic-website.com',
           fromDate: '2021',
-          toDate: '2020',
-          tasks: [
-            'Generator for content-managed brochure sites, for people without the time to learn Wix',
-            'Several production instances: fromageriesa.ch, jura-coiffure.ch',
-            "<b class='accent'>Nuxt.js, Node, Django</b>",
+          toDate: '2018',
+          subEntries: [
+            {
+              title: 'Padel Pro',
+              subtitle: 'web, Android & iOS',
+              tasks: [
+                'App to manage padel tournaments, shipped to Android and iOS from one codebase',
+              ],
+            },
+            {
+              title: 'Generic Website',
+              subtitle: 'landing-page generator',
+              tasks: [
+                'Landing pages generator with an extremely easy way to manage the content',
+                'Subscription billing for the service',
+                'Several production instances: fromageriesa.ch, jura-coiffure.ch',
+              ],
+            },
+            {
+              title: 'Swiss Association of Occupational Therapists',
+              subtitle: 'snase.ch',
+              tasks: [
+                'Website with a custom CMS, with a complete but extremely simple administration',
+              ],
+            },
           ],
-        },
-        {
-          title: 'Association Neuchâteloise des Ergothérapeutes',
-          place: 'Independent',
-          url: 'snase.ch',
-          fromDate: '2019',
-          toDate: '',
-          tasks: [
-            'Website with a custom CMS built to make administration as simple as possible',
-            "<b class='accent'>Nuxt.js, Django</b>",
-          ],
+          stack: 'Nuxt.js, Node, Django, Capacitor, Cordova, Firebase, Stripe, Chargebee, Digital Ocean',
         },
       ],
     },
     {
-      name: 'Earlier projects',
+      name: 'Earlier engineering projects',
       icon: 'fa-folder-open',
       entries: [
         {
-          title: 'Two RTS game engines',
-          place: 'HE-Arc — sole author of both engines',
+          title: 'Engineering projects',
+          place: 'HE-Arc — sole author',
           fromDate: '2020',
           toDate: '2019',
-          description: 'Built a year apart, each with a ~50-page technical report. Every commit in both repositories is mine.',
+          description: 'Built during my engineering degree, each with its own technical report.',
           tasks: [
-            "<b>YARTS (2019)</b> — Java 8, LibGDX, Ashley ECS, Box2D · 137 classes, ~11,200 lines. Entity-component architecture chosen by benchmarking three candidate designs from 50 to 10,000 entities. A* pathfinding behind a runtime toggle with a guaranteed fallback. F1–F12 in-game debug suite.",
-            "<b>YAARTS (2020)</b> — Unity, C#, URP · ~7,600 lines. A deliberate rebuild of the same game in a different engine to correct the first version's architecture. Evaluated Unity DOTS in depth and rejected it as too volatile in preview.",
+            "<b>YARTS (2019)</b> — RTS game engine in Java and LibGDX, with an entity-component architecture chosen by benchmarking three candidate designs.",
+            "<b>YAARTS (2020)</b> — Unity and C#: a deliberate rebuild of the same game in a different engine to correct the architecture I had got wrong the first time.",
+            "<b>Linor (2020)</b> — real-time lane detection in Python and OpenCV.",
           ],
+          stack: 'Java, LibGDX, Unity, C#, Python, OpenCV',
         },
       ],
     },
@@ -162,6 +171,22 @@ export default {
           fromDate: '2013',
           toDate: '2010',
           tasks: [],
+        },
+      ],
+    },
+    {
+      name: 'Before software',
+      icon: 'fa-music',
+      entries: [
+        {
+          title: 'Professional DJ',
+          place: 'Independent',
+          fromDate: '2016',
+          toDate: '2005',
+          tasks: [
+            'Residencies in Belgium, Australia and Thailand',
+            'Mixing instructor at the first official DJ school in Belgium.',
+          ],
         },
       ],
     },

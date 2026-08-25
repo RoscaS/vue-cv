@@ -27,23 +27,14 @@
         v-for="block in content.sidebar.blocks"
         :key="block.name"
       >
-        <h1 v-if="!block.icon">{{ block.name }}</h1>
-        <h1 v-else style="text-align: center;">
+        <h2 v-if="!block.icon">{{ block.name }}</h2>
+        <h2 v-else style="text-align: center;">
           <i class="fa" :class="block.icon" />
-        </h1>
+        </h2>
         <ul class="subtitle">
-          <li
-            v-for="entry in block.entries"
-            :key="entry.value"
-            :style="entry.complement ? 'margin-bottom: 5px' : ''"
-          >
-            <span class="block-entry-value">{{ entry.value }}</span>
-            <br />
-            <span
-              class="block-entry-complement"
-              v-if="entry.complement"
-              v-html="entry.complement"
-            />
+          <li v-for="entry in block.entries" :key="entry.label">
+            <span class="block-entry-label" v-html="entry.label" />
+            <span class="block-entry-items" v-if="entry.items" v-html="entry.items" />
           </li>
         </ul>
       </div>
@@ -72,13 +63,18 @@ export default {
   flex-direction: column;
 }
 
-.block-entry-value {
+/* group label: the category. Darker and heavier than the list it introduces. */
+.block-entry-label {
+  display: block;
   font-weight: 400;
 }
 
-.block-entry-complement {
-  font-weight: 100;
-  margin-left: 2px;
+/* the list itself: lighter, greyer, indented under its label */
+.block-entry-items {
+  display: block;
+  padding-left: 5px;
+  font-weight: 300;
+  color: #666;
 }
 
 #disclamer {

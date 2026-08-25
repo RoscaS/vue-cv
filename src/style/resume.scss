@@ -1,7 +1,10 @@
 @page {
-  //size: letter portrait;
   size: A4 portrait;
-  margin: 0;
+  /* Vertical margins only: they give every page a bottom (and page-2 top) gutter,
+     so text never runs to the paper edge on a break. The grey sidebar band is
+     painted as a body background, which propagates to the canvas and still bleeds
+     to the edges. Horizontal margins stay 0 for that reason. */
+  margin: 0.3in 0;
 }
 
 * {
@@ -10,8 +13,9 @@
 
 :root {
   --page-width: 8.27in;
-  --page-height: 11.69in;
-  --main-width: 6.3in;
+  /* printable height = A4 (11.69in) minus the @page vertical margins */
+  --page-height: 11.09in;
+  --main-width: 6in;
   --sidebar-width: calc(var(--page-width) - var(--main-width));
   --decorator-horizontal-margin: 0.2in;
 
@@ -32,20 +36,32 @@
 
 
 
+/* The grey sidebar band lives on the root element so it paints across every page,
+   margins included, instead of stopping at the first page break like the old
+   background-color on a page-tall #sidebar did. */
+html {
+  background: linear-gradient(
+    to right,
+    #fff 0 var(--main-width),
+    #f2f2f2 var(--main-width) var(--page-width)
+  );
+}
+
 body {
   width: var(--page-width);
-  height: var(--page-height);
+  min-height: var(--page-height);
   margin: 0;
   font-family: "Open Sans", sans-serif;
   font-weight: 500;
-  line-height: 1.3;
+  line-height: 1.38;
   color: #444;
   hyphens: auto;
 }
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   margin: 0;
   color: #000;
 }
@@ -55,13 +71,10 @@ li {
 }
 
 #main {
-  //display: inline-grid;
-  //align-content: center;
-
   float: left;
   width: var(--main-width);
-  height: var(--page-height);
-  padding: 1in 0.25in 0 0.25in;
+  min-height: var(--page-height);
+  padding: 0.7in 0.25in 0.4in 0.25in;
   font-size: 7pt;
 }
 
@@ -69,10 +82,9 @@ li {
   float: right;
   position: relative; /* for disclaimer */
   width: var(--sidebar-width);
-  height: var(--page-height);
-  padding: 0.6in var(--sidebar-horizontal-padding);
-  background-color: #f2f2f2;
-  font-size: 8.5pt;
+  min-height: var(--page-height);
+  padding: 0.12in var(--sidebar-horizontal-padding) 0.4in;
+  font-size: 8pt;
 }
 
 /* main */
@@ -109,7 +121,7 @@ h2 {
 /*** categorial blocks ***/
 
 .main-block {
-  margin-top: 0.1in;
+  margin-top: 0.28in;
 }
 
 #main h2 {
@@ -166,6 +178,21 @@ h2 {
 .blocks {
   display: flex;
   flex-flow: row nowrap;
+}
+
+/* Gap between entries, as padding INSIDE the row rather than margin between rows:
+   the timeline is the decorator's border-left, which only spans its own row, so a
+   margin here shows up as a break in the line. Not --row-blocks-padding-top, which
+   also positions the dot. */
+.blocks:not(:last-child) .details {
+  padding-bottom: 0.15in;
+}
+
+/* never strand an entry's title at the foot of a page. An entry taller than a
+   page (Arcanite) is broken anyway — the browser falls back when it must. */
+.blocks {
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .blocks > div {
@@ -242,8 +269,9 @@ h2 {
 }
 
 .blocks:last-child .decorator {
-  /* slightly shortens it */
-  margin-bottom: 0.25in;
+  /* Was 0.25in to taper the line. The stack line now sits at the foot of an entry,
+     so any shortening cuts the timeline off above real content. */
+  margin-bottom: 0;
 }
 
 /***** fine-tunes on the details block where the real juice is *****/
@@ -264,35 +292,40 @@ h2 {
   font-size: 9pt;
 }
 
-.main-block:not(.concise) .details div {
-  margin: 0.18in 0 0.1in 0;
+.main-block:not(.concise) .details > .description {
+  margin: 0.07in 0 0.1in 0;
 }
 
-.main-block:not(.concise) .blocks:last-child .details div {
+.main-block:not(.concise) .blocks:last-child .details > .description {
   margin-bottom: 0;
 }
 
-.main-block.concise .details div:not(.concise) {
-  /* use padding to work around the fact that margin doesn't affect floated
-     neighboring elements */
+.main-block.concise .details > .description:not(.concise) {
   padding: 0.05in 0 0.07in 0;
 }
 
+/* header meta row: place on the left, location/url on the right.
+   Flex rather than floats — the old float pair overlapped when both were long. */
+.details .meta {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: baseline;
+  justify-content: space-between;
+  column-gap: 10pt;
+  margin-top: 0.5pt;
+}
+
 .details .place {
-  float: left;
+  min-width: 0;
   font-size: 7.5pt;
 }
 
-.details .location {
-  float: right;
-}
-
-.details .url {
-  float: right;
-}
-
-.details div {
-  clear: both;
+.details .meta-right {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: baseline;
+  column-gap: 8pt;
+  white-space: nowrap;
 }
 
 .details .location::before {
@@ -327,7 +360,7 @@ h2 {
 }
 
 #main li {
-  margin: 0 0 0.025in 0;
+  margin: 0 0 0.045in 0;
 }
 
 /****** customize list symbol style ******/
@@ -352,15 +385,84 @@ h2 {
   margin-left: 0 !important;
 }
 
+/***** sub-entries: named blocks sharing one date range *****/
+
+.sub-entry {
+  margin-top: 0.13in;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.sub-entry:first-child {
+  margin-top: 0.04in;
+}
+
+.sub-header {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: baseline;
+  justify-content: space-between;
+  column-gap: 8pt;
+  border-bottom: 1px solid #e2e2e2;
+  padding-bottom: 1pt;
+}
+
+.sub-title {
+  font-size: 8.5pt;
+  font-weight: 600;
+  color: #000;
+}
+
+.sub-subtitle {
+  font-weight: 300;
+  color: #555;
+}
+
+.sub-subtitle::before {
+  content: " — ";
+}
+
+.sub-date {
+  flex: 0 0 auto;
+  font-size: 7pt;
+  color: #777;
+  white-space: nowrap;
+}
+
+.sub-description {
+  display: block;
+  margin-top: 0.04in;
+  /* lighter than the entry intro: only the top-level description carries weight 400 */
+  font-weight: 300;
+}
+
+.sub-entry ul.tasks {
+  margin: 0.04in 0 0 0;
+}
+
 /* sidebar */
 
 #sidebar h1 {
   font-weight: 400;
-  font-size: 11pt;
+  font-size: 10pt;
+}
+
+/* section headings (CONTACT INFO / LANGUAGES / TECH STACK): same level as #contact's
+   h1. A clear step above the group labels inside them, which are 8.5pt. */
+#sidebar h2 {
+  font-weight: 400;
+  font-size: 10pt;
 }
 
 .side-block {
-  margin-top: 0.5in;
+  margin-top: 0.165in;
+}
+
+/* A long section (TECH STACK) flows across the page break rather than jumping
+   whole to page 2; only an individual group is kept intact. */
+.side-block-element li {
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 #contact ul {
@@ -368,21 +470,36 @@ h2 {
   padding-left: 0;
   font-family: "Source Code Pro";
   font-weight: 400;
-  line-height: 1.75;
+  line-height: 1.6;
+  /* monospace is wide: check the longest line still fits if an address changes */
+  font-size: 8pt;
+}
+
+#contact li {
+  display: flex;
+  gap: 4pt;
+  margin-bottom: 1pt;
 }
 
 #contact li > i {
   width: 9pt; /* for text alignment */
-  text-align: right;
+  text-align: center;
+  flex: none;
+  line-height: inherit;
 }
 
 .side-block-element {
-  line-height: 1.5;
+  line-height: 1.38;
 }
 
 .side-block-element ul {
-  margin: 0.05in 0 0.15in;
+  margin: 0.04in 0 0.1in;
   padding: 0;
+}
+
+/* one labelled group per li: label line, then its list indented beneath */
+.side-block-element li {
+  margin-bottom: 5px;
 }
 
 #disclaimer {
