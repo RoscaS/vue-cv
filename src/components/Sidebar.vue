@@ -61,10 +61,12 @@ export default {
 .sidebar-wrapper {
   display: flex;
   flex-direction: column;
-  /* centred in page 1 rather than pinned to the top: the content is shorter than
-     the page, and hanging it from the top left a deep empty band at the foot.
-     Only works while the sidebar fits one page — ./scripts/measure.sh checks that. */
-  justify-content: center;
+  /* Pinned to the top, not centred: centring divides whatever slack is left, so the
+     name landed at a different height in each language. --sidebar-offset (set by
+     alignSidebar() in App.vue) then aligns the name with the first section heading,
+     identically in both languages. */
+  justify-content: flex-start;
+  padding-top: var(--sidebar-offset, 0);
 }
 
 /* group label: the category. Darker and heavier than the list it introduces. */

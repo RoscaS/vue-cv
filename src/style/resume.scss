@@ -80,6 +80,10 @@ li {
   width: var(--main-width);
   min-height: var(--page-height);
   padding: 0.7in 0.25in 0.4in 0.25in;
+  /* alignSidebar() in App.vue nudges the column down when the sidebar's name sits
+     lower than the first section heading — the photo above the name cannot be
+     pulled any higher without clipping off the sheet. */
+  padding-top: calc(0.7in + var(--main-offset, 0px));
   font-size: 7pt;
 }
 
@@ -219,7 +223,10 @@ h2 {
   top: 100%;
   left: var(--date-block-width);
   width: 1px;
-  height: 100vh;
+  /* set by fitTimeline() in App.vue: the exact gap from the end of this entry to
+     the foot of its page. A fixed 100vh overran onto the next page and painted
+     through every section gap there. */
+  height: var(--fill-page-height, 0);
   background: #ccc;
 }
 

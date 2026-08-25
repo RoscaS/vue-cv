@@ -121,8 +121,10 @@ Where a page break falls is a content decision, so it lives in `src/content.js`,
 
 `breakBefore` forces the break and adds the page's top gutter as padding, since `@page` margins
 can't be relied on. `fillPage` carries the timeline down to the foot of the page after the
-entry's content ends — an absolutely positioned 1px overflow that the break clips, so it adds no
-height. They are a pair: `fillPage` on an entry that is *not* last on its page draws a line over
+entry's content ends: an absolutely positioned 1px overflow whose height `fitTimeline()` in
+`App.vue` measures after layout. It has to be measured — the gap is 98px in English and 17px in
+French — and a fixed height overruns onto the next page, where it paints straight through every
+section gap and past the last entry. They are a pair: `fillPage` on an entry that is *not* last on its page draws a line over
 whatever follows it.
 
 Both locales need their own flags, and the right entry differs — French runs ~10% longer, so
@@ -137,7 +139,11 @@ check `cv-fr.pdf` after moving them.
   the sidebar's content fits on one page, so a band on page 2 would be an empty grey column. Size
   it to the printable height, not the 11.69in sheet: the html box starts below the top `@page`
   margin, so the sheet height spills a strip onto page 2.
-- The sidebar is vertically centred in page 1 (`justify-content: center` on `.sidebar-wrapper`).
+- The sidebar is top-aligned, and `alignSidebar()` in `App.vue` lines the name up with the first
+  section heading. Centring it looked fine in one language and wrong in the other, because it
+  divides whatever slack is left and the two locales have different amounts. The photo is 77px so
+  the name reaches that line without the column being pushed down — French has no vertical slack
+  to give, and pushing it cost a third page.
   Keep it shorter than one page: it is a single column with no continuation, and centring clips
   rather than flows if it outgrows the page.
   `./scripts/measure.sh` prints where it ends. It measures `#contact` and `.side-block-element`,
