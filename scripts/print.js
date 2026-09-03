@@ -22,10 +22,10 @@ function printPdf(url, out) {
         "--disable-gpu",
         "--no-pdf-header-footer",
         `--print-to-pdf=${out}`,
-        // The dev server keeps a live-reload socket open, which never lets the virtual
-        // time budget run out on its own: the hard timeout is what ends the print there.
-        "--virtual-time-budget=10000",
-        "--timeout=15000",
+        // Chrome prints once the page has loaded; the timeout is a cap, not the wait.
+        // Not --virtual-time-budget: combined with the dev server's live-reload socket
+        // it hangs Chrome for good on the letter, reproducibly.
+        "--timeout=10000",
         url,
       ],
       { stdio: "ignore" },
