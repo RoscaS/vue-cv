@@ -3,6 +3,22 @@
 Vue 2 CV generator. All content lives in `src/content.js`; the components only lay it out.
 Output is A4, print-first — the browser view is the deliverable, the PDF is printed from it.
 
+## Quickstart
+
+```
+npm install
+VUE_APP_LANG=fr ./scripts/pdf.sh cv-fr.pdf     # French, two pages
+VUE_APP_LANG=en ./scripts/pdf.sh cv-en.pdf     # English
+VUE_APP_LANG=fr-light ./scripts/pdf.sh cv-fr-light.pdf
+VUE_APP_LANG=en-light ./scripts/pdf.sh cv-en-light.pdf
+./scripts/measure.sh                           # how full the last page is, before adding content
+```
+
+Needs Node, Python 3 and Google Chrome at its default macOS path (`CHROME=/path/to/chrome`
+otherwise). Call `./scripts/pdf.sh` directly: `npm run pdf -- cv-fr.pdf` does not pass the
+argument through and writes `cv.pdf`. Never print from the browser dialog, it adds headers and
+margins.
+
 ## Setup
 
 ```
