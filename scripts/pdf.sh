@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
-# Build the CV and print it to PDF.
+# Build the CV and print it to PDF, without the dev server.
 #
 #   ./scripts/pdf.sh [output.pdf]
-#   VUE_APP_LANG=fr ./scripts/pdf.sh cv-fr.pdf
 #
-# Why the flags: webpack 4 needs --openssl-legacy-provider on modern Node, and
-# Chrome will not load the bundle over file:// so the build is served locally first.
+# webpack 4 needs --openssl-legacy-provider on modern Node; the Chrome call lives in
+# scripts/print.js, shared with the dev server's Publish button.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
 OUT="${1:-cv.pdf}"
 PORT="${PORT:-8321}"
-CHROME="${CHROME:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
 
 NODE_OPTIONS=--openssl-legacy-provider npx vue-cli-service build
 
@@ -20,8 +18,4 @@ SERVER=$!
 trap 'kill $SERVER 2>/dev/null || true' EXIT
 sleep 1
 
-"$CHROME" --headless --disable-gpu --no-pdf-header-footer \
-  --print-to-pdf="$OUT" --virtual-time-budget=10000 \
-  "http://localhost:$PORT/" >/dev/null 2>&1
-
-echo "wrote $OUT"
+node scripts/print.js "http://localhost:$PORT/" "$OUT"

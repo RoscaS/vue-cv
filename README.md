@@ -1,23 +1,30 @@
 # vue-cv
 
-Vue 2 CV generator. All content lives in `src/content.js`; the components only lay it out.
-Output is A4, print-first — the browser view is the deliverable, the PDF is printed from it.
+Vue 2 CV generator. All content lives in `src/content.json`; the components only lay it out.
+Output is A4, print-first: the browser view is the deliverable, the PDF is printed from it.
 
 ## Quickstart
 
 ```
 npm install
-VUE_APP_LANG=fr ./scripts/pdf.sh cv-fr.pdf     # French, two pages
-VUE_APP_LANG=en ./scripts/pdf.sh cv-en.pdf     # English
-VUE_APP_LANG=fr-light ./scripts/pdf.sh cv-fr-light.pdf
-VUE_APP_LANG=en-light ./scripts/pdf.sh cv-en-light.pdf
-./scripts/measure.sh                           # how full the last page is, before adding content
+./scripts/pdf.sh cv-fr.pdf      # build and print, two pages
+./scripts/measure.sh            # how full the last page is, before adding content
 ```
 
-Needs Node, Python 3 and Google Chrome at its default macOS path (`CHROME=/path/to/chrome`
-otherwise). Call `./scripts/pdf.sh` directly: `npm run pdf -- cv-fr.pdf` does not pass the
-argument through and writes `cv.pdf`. Never print from the browser dialog, it adds headers and
-margins.
+With a dev server and a target folder, the PDF is printed from the page you are looking at:
+
+```
+PORT=8080 PUBLISH_DIR=~/Documents/Perso/Job/CV/cv npm run dev
+```
+
+Hover the top-left corner, click **Publish**, give the version a name: `en-light` writes
+`cv-en-light.pdf` into `PUBLISH_DIR`, an empty name writes `cv.pdf`. The overlay reports the
+page count and flags anything but two pages. Without `PUBLISH_DIR` there is no button.
+
+Needs Node, Python 3 (for `pdf.sh`) and Google Chrome at its default macOS path
+(`CHROME=/path/to/chrome` otherwise). Call `./scripts/pdf.sh` directly: `npm run pdf -- cv-fr.pdf`
+does not pass the argument through and writes `cv.pdf`. Never print from the browser dialog, it
+adds headers and margins.
 
 ## Setup
 
@@ -33,34 +40,21 @@ Sass is dart-sass (`sass`), not node-sass — node-sass 4.x does not build on mo
 
 | | |
 |---|---|
-| `npm run dev` | dev server, hot reload |
+| `npm run dev` | dev server, hot reload; `PORT` picks the port, `PUBLISH_DIR` enables the Publish button |
 | `npm run build` | production build into `dist/` |
-| `npm run pdf [out.pdf]` | build, serve `dist/`, print to PDF with headless Chrome |
+| `npm run pdf [out.pdf]` | build, serve `dist/`, print to PDF with headless Chrome (`scripts/print.js`) |
 | `./scripts/measure.sh` | after a build: where each section ends, in px, and how full the last page is |
 | `swift scripts/pdf-to-png.swift cv.pdf preview [scale]` | rasterise every PDF page to `preview-p1.png`, … to eyeball the pagination |
 
 `npm run pdf` needs Chrome at the default macOS path; override with `CHROME=/path/to/chrome`.
 Do not print from the browser's own dialog — it adds headers and its own margins.
 
-## Content format — `src/content.js`
+## Content format, `src/content.json`
 
-Four contents are bundled: `src/content.js` (en), `src/content-fr.js` (fr), and two "light"
-variants, `src/content-en-light.js` and `src/content-fr-light.js`. They all have the same shape;
-edit the pair you are changing, or they drift.
-
-The light pair are not locales — same language, same facts, trimmed Arcanite entry: its two main
-sub-entries carry a prose `description` and no `tasks`, so they render as paragraphs instead of
-bullet lists. They ride the language switch because that is already the mechanism for "print this
-content instead".
-
-`VUE_APP_LANG=fr npm run pdf cv-fr.pdf` sets the language the build starts in — that is how a
-PDF of one language is printed. In the browser, the **language toggle** in the top-left corner
-switches at runtime: it is invisible until hovered, absolutely positioned so it never affects
-layout, and `display: none` when printing. `src/mixins/content.js` holds the locale map and a
-`Vue.observable` language, so flipping it re-renders everything.
-
-Adding a locale means adding the file, importing it in the mixin's `locales` map, and writing
-the translation — the toggle picks up the extra button on its own.
+One content file. Another language or a lighter variant is an edit of that file, printed under
+its own name from the Publish button (or copied aside and swapped in). Earlier versions kept four
+contents behind a language toggle; they are in git history before September 2026, and the
+markdown drafts live in `~/Documents/Perso/Job/CV/drafts/`.
 
 An entry in `blocks[].entries[]`:
 
@@ -107,7 +101,7 @@ is the render order, so a trailing tech-stack bullet in `tasks` still lands last
 
 Set `break: true` on a block in `blocks[]` to force a page break before it.
 
-## Sidebar — `sidebar` in `src/content.js`
+## Sidebar, `sidebar` in `src/content.json`
 
 `sidebar.contactSection.entries[]` is the CONTACT INFO block: `{ icon: 'fa-phone', value: '…' }`,
 rendered monospace with a FontAwesome icon per line. It is only rendered when non-empty.
@@ -134,7 +128,7 @@ it under that, since the sidebar is a single column with no second column to con
 
 ## Page breaks — `fillPage` and `breakBefore`
 
-Where a page break falls is a content decision, so it lives in `src/content.js`, per locale:
+Where a page break falls is a content decision, so it lives in `src/content.json`:
 
 ```js
 { title: 'Arcanite Solutions SA', fillPage: true,   … }   // closes page 1
@@ -164,9 +158,9 @@ Do not reach for CSS here: **Chrome ignores `break-after: avoid` when printing.*
 `.main-block > h2 { break-after: avoid }` rule was tried against this exact case and changed
 nothing.
 
-Every content file needs its own flags, and the right entry differs — French runs ~10% longer, so
-check `cv-fr.pdf` after moving them, and the light variants fit their whole Experience section on
-page 1, which the full ones do not.
+The right entry differs per variant: French runs ~10% longer than English, and a lighter
+Arcanite entry fits the whole Experience section on page 1, which the full one does not. Check the
+PDF after moving the flags.
 
 ## Layout notes
 
@@ -179,7 +173,7 @@ page 1, which the full ones do not.
   margin, so the sheet height spills a strip onto page 2.
 - The sidebar is top-aligned, and `alignSidebar()` in `App.vue` lines the name up with the first
   entry's title. Centring it looked fine in one language and wrong in the other, because it
-  divides whatever slack is left and the two locales have different amounts. The offset is set as
+  divides whatever slack is left and each variant has a different amount. The offset is set as
   `--sidebar-offset` on the `#sidebar` rule in this file, not in `Sidebar.vue`: the ID rule
   outranks the component's scoped class and wins the `padding` shorthand. If the name ever sits
   *lower* than the target, the main column is pushed down instead (`--main-offset`) — watch the
@@ -204,10 +198,8 @@ page 1, which the full ones do not.
 - An entry's header is kept whole (`break-inside: avoid` on `.details > header`). The rule also
   carries `break-after: avoid`, which Chrome ignores in print — an entry title is safe because the
   header block itself cannot split, not because the break-after took.
-- Check both languages after any layout change — French runs ~10% longer than English and hits
-  page limits first: `npm run pdf cv-en.pdf && VUE_APP_LANG=fr npm run pdf cv-fr.pdf`.
-  The light variants print the same way: `VUE_APP_LANG=fr-light npm run pdf cv-fr-light.pdf`,
-  `VUE_APP_LANG=en-light npm run pdf cv-en-light.pdf`.
+- Check every variant you keep after any layout change: French runs ~10% longer than English and
+  hits page limits first.
 - **Printing from Chrome's own dialog: leave Margins on "Default" and tick "Background graphics".**
   "Margins: None" discards the `@page` rule, and with it the gutter that keeps page 2's first line
   off the paper edge. Default keeps the gutter; the band still bleeds, because a background on

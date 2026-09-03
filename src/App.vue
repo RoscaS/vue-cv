@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="sidebar-band" aria-hidden="true" />
-    <LangToggle />
+    <PublishOverlay />
     <MainContent />
     <Sidebar id="sidebar" />
   </div>
@@ -10,7 +10,7 @@
 <script>
 import MainContent from "@/components/sections/MainContent";
 import Sidebar from "@/components/Sidebar";
-import LangToggle from "@/components/LangToggle";
+import PublishOverlay from "@/components/PublishOverlay";
 
 const PAGE_PX = 11.69 * 96; // A4 at 96dpi; @page margins are zero
 // --page-margin in resume.scss: the visual margin painted inside the sheet. The
@@ -19,7 +19,7 @@ const PAGE_MARGIN_PX = 0.3 * 96;
 
 export default {
   name: "App",
-  components: { Sidebar, MainContent, LangToggle },
+  components: { Sidebar, MainContent, PublishOverlay },
   mounted() {
     this.fit();
     // web fonts change every measurement below, so redo it once they land
