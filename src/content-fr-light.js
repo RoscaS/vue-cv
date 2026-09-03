@@ -66,7 +66,7 @@ export default {
           url: 'arcanite.ch',
           fromDate: '2026',
           toDate: '2021',
-          description: "Société suisse de développement logiciel d'environ 45 collaborateurs. En cinq ans, travaillé sur neuf produits, principalement côté front-end mais régulièrement côté back-end également. De la SPA au monolithe Django legacy, avec maintenance en production sur plusieurs années. Référent front-end : code reviews, décisions de design et d'architecture, évolution des guidelines internes.",
+          description: "Éditeur de logiciels suisse d'environ 45 collaborateurs. En cinq ans, j'ai travaillé sur neuf produits, principalement côté front-end mais aussi régulièrement côté back-end. De la SPA au monolithe Django legacy, avec maintenance en production sur plusieurs années. Référent front-end : code reviews, décisions de design et d'architecture, évolution des guidelines internes.",
           stack: 'Python, Django, Vue 2/3, TypeScript, jQuery, GitLab CI, Docker',
           subEntries: [
             // AbaHost et Wecan : description en prose, pas de `tasks`. C'est le point

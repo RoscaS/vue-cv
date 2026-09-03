@@ -28,8 +28,14 @@ Do not print from the browser's own dialog — it adds headers and its own margi
 
 ## Content format — `src/content.js`
 
-Two locales are bundled: `src/content.js` (en) and `src/content-fr.js` (fr). They have the
-same shape; edit both, or they drift.
+Four contents are bundled: `src/content.js` (en), `src/content-fr.js` (fr), and two "light"
+variants, `src/content-en-light.js` and `src/content-fr-light.js`. They all have the same shape;
+edit the pair you are changing, or they drift.
+
+The light pair are not locales — same language, same facts, trimmed Arcanite entry: its two main
+sub-entries carry a prose `description` and no `tasks`, so they render as paragraphs instead of
+bullet lists. They ride the language switch because that is already the mechanism for "print this
+content instead".
 
 `VUE_APP_LANG=fr npm run pdf cv-fr.pdf` sets the language the build starts in — that is how a
 PDF of one language is printed. In the browser, the **language toggle** in the top-left corner
@@ -130,8 +136,21 @@ French — and a fixed height overruns onto the next page, where it paints strai
 section gap and past the last entry. They are a pair: `fillPage` on an entry that is *not* last on its page draws a line over
 whatever follows it.
 
-Both locales need their own flags, and the right entry differs — French runs ~10% longer, so
-check `cv-fr.pdf` after moving them.
+A section heading is a third case, and neither flag covers it: `breakBefore` sits on an *entry*,
+so it moves the entry and leaves the section's `h2` alone at the foot of the previous page. Break
+the whole block instead, with `break` on the block itself:
+
+```js
+{ name: 'Education', icon: 'fa-graduation-cap', break: true, entries: [ … ] }  // heading included
+```
+
+Do not reach for CSS here: **Chrome ignores `break-after: avoid` when printing.** A
+`.main-block > h2 { break-after: avoid }` rule was tried against this exact case and changed
+nothing.
+
+Every content file needs its own flags, and the right entry differs — French runs ~10% longer, so
+check `cv-fr.pdf` after moving them, and the light variants fit their whole Experience section on
+page 1, which the full ones do not.
 
 ## Layout notes
 
@@ -166,10 +185,13 @@ check `cv-fr.pdf` after moving them.
   empties page 1 and costs a third page. Use `.blocks + .blocks`, never `:not(:first-child)`:
   the section's `h2` is the first child, so that selector matches every entry, Arcanite included.
   If a later entry ever grows past a page, it needs the same exemption.
-- An entry's header is kept with what follows (`break-after: avoid` on `.details > header`), so a
-  title is never stranded at the foot of a page.
+- An entry's header is kept whole (`break-inside: avoid` on `.details > header`). The rule also
+  carries `break-after: avoid`, which Chrome ignores in print — an entry title is safe because the
+  header block itself cannot split, not because the break-after took.
 - Check both languages after any layout change — French runs ~10% longer than English and hits
   page limits first: `npm run pdf cv-en.pdf && VUE_APP_LANG=fr npm run pdf cv-fr.pdf`.
+  The light variants print the same way: `VUE_APP_LANG=fr-light npm run pdf cv-fr-light.pdf`,
+  `VUE_APP_LANG=en-light npm run pdf cv-en-light.pdf`.
 - **Printing from Chrome's own dialog: leave Margins on "Default" and tick "Background graphics".**
   "Margins: None" discards the `@page` rule, and with it the gutter that keeps page 2's first line
   off the paper edge. Default keeps the gutter; the band still bleeds, because a background on

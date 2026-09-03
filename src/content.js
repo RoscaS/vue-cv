@@ -54,7 +54,7 @@ export default {
           url: 'arcanite.ch',
           fromDate: '2026',
           toDate: '2021',
-          description: "Swiss software firm, ~45 people, self-financed. Nine products in five years, in teams of two to six, ranging from SPAs to a decade-old Django monolith, and I stayed with most of them long enough to run them in production for years. Mainly frontend, regularly backend. As frontend referent I reviewed the team's code, took part in design and architecture decisions across projects, and helped maintain the company frontend guidelines.",
+          description: "Swiss software vendor, ~45 people, self-financed. Nine products in five years, in teams of two to six, ranging from SPAs to a decade-old Django monolith, and I stayed with most of them long enough to run them in production for years. Mainly frontend, regularly backend. As frontend referent I reviewed the team's code, took part in design and architecture decisions across projects, and helped maintain the company frontend guidelines.",
           stack: 'Python, Django, Vue 2/3, TypeScript, jQuery, GitLab CI, Docker',
           fillPage: true,
           subEntries: [

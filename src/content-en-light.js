@@ -70,7 +70,7 @@ export default {
           url: 'arcanite.ch',
           fromDate: '2026',
           toDate: '2021',
-          description: "Swiss software company of around 45 people. Worked on nine products in five years, mainly on the frontend but regularly on the backend as well. From SPAs to a legacy Django monolith, with maintenance in production over several years. Frontend referent: code reviews, design and architecture decisions, evolution of the internal guidelines.",
+          description: "Swiss software vendor of around 45 people. I worked on nine products in five years, mainly on the frontend but also regularly on the backend. From SPAs to a legacy Django monolith, with maintenance in production over several years. Frontend referent: code reviews, design and architecture decisions, evolution of the internal guidelines.",
           stack: 'Python, Django, Vue 2/3, TypeScript, jQuery, GitLab CI, Docker',
           subEntries: [
             // AbaHost and Wecan: prose `description`, no `tasks`. That is the whole point of

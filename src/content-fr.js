@@ -54,7 +54,7 @@ export default {
           url: 'arcanite.ch',
           fromDate: '2026',
           toDate: '2021',
-          description: "Société suisse de développement logiciel d’environ 45 collaborateurs, autofinancée. En cinq ans, j’ai travaillé sur neuf produits au sein d’équipes de deux à six personnes, de la SPA au monolithe Django vieux de dix ans, en assurant leur maintenance en production pendant plusieurs années. Principalement front-end, avec une implication régulière côté back-end, j’étais référent front-end de l’entreprise. À ce titre, je réalisais les code reviews, participais aux décisions de design et d’architecture tout en contribuant à l’évolution des guidelines internes.",
+          description: "Éditeur de logiciels suisse d’environ 45 collaborateurs, autofinancé. En cinq ans, j’ai travaillé sur neuf produits au sein d’équipes de deux à six personnes, de la SPA au monolithe Django vieux de dix ans, en assurant leur maintenance en production pendant plusieurs années. Principalement front-end, avec une implication régulière côté back-end, j’étais référent front-end de l’entreprise. À ce titre, je réalisais les code reviews, participais aux décisions de design et d’architecture tout en contribuant à l’évolution des guidelines internes.",
           stack: 'Python, Django, Vue 2/3, TypeScript, jQuery, GitLab CI, Docker',
           fillPage: true,
           subEntries: [
