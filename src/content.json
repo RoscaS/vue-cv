@@ -54,11 +54,11 @@
           },
           {
             "label": "Mobile",
-            "items": "Capacitor, Cordova (Android et iOS)"
+            "items": "Capacitor, Cordova"
           },
           {
             "label": "Bases de données",
-            "items": "PostgreSQL, Elasticsearch, Firebase Realtime Database, Firestore"
+            "items": "PostgreSQL, Elasticsearch, Firebase Realtime DB, Firestore"
           },
           {
             "label": "DevOps",
@@ -95,7 +95,7 @@
       "entries": [
         {
           "title": "Arcanite Solutions SA",
-          "place": "Développeur, référent front-end",
+          "place": "Développeur full-stack, référent front-end",
           "location": "Puidoux (VD)",
           "url": "arcanite.ch",
           "fromDate": "2026",

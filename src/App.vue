@@ -66,10 +66,11 @@ export default {
       const delta = Math.round(
         heading.getBoundingClientRect().top - name.getBoundingClientRect().top
       );
+      // Only the sidebar moves. Since the 150px photo (04.11.2026) the name sits ~65px
+      // below the first entry; pushing main down to meet it left a gap at the top, and Sol
+      // prefers the slack at the foot of the page. So main stays put and the two no longer align.
       if (delta > 0) {
         sidebar.style.setProperty("--sidebar-offset", delta + "px");
-      } else if (delta < 0) {
-        main.style.setProperty("--main-offset", -delta + "px");
       }
     },
   },

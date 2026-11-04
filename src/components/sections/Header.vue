@@ -1,6 +1,6 @@
 <template>
   <div class="header-wrapper">
-    <img class="picture" src="@/assets/picture.jpg" alt="" />
+    <img class="picture" src="@/assets/picture-cv.jpg" alt="" />
     <h1 style="font-size: 24px">
       <span> {{ content.firstname }}</span>
       <span class="primary"> {{ content.lastname }}</span>
@@ -27,17 +27,19 @@ export default {
 }
 
 .picture {
+  margin-top: 16px;
   margin-bottom: 6px;
   margin-left: auto;
   margin-right: auto;
   background-color: #e2e2e2;
   border-radius: 50%;
-  /* alignSidebar() pins the name to the first entry's title, so every px here pushes
-     the MAIN column down too — and page 1 of main is full to the band's foot. The
-     ceiling is main, not the sidebar: it was paid for by the small spacing trims in
-     resume.scss (.sub-entry, #main ul, #main li). Re-run ./scripts/measure.sh in FR,
-     which is the tight language, before growing it further. */
-  width: 88px;
-  height: 88px;
+  /* 150px since 04.11.2026 (was 88px): as large as the sidebar allows; the ceiling is the
+     sidebar's foot in French, ~16px under the band's end. The name no longer lines up with
+     the first entry: alignSidebar() only moves the sidebar, never main (Sol's choice).
+     picture-cv.jpg is picture.jpg cropped square on the face (920px, sips). Re-run
+     ./scripts/measure.sh in FR, the tight language, before growing it further. */
+  width: var(--picture-size, 150px);
+  height: var(--picture-size, 150px);
+  object-fit: cover;
 }
 </style>
